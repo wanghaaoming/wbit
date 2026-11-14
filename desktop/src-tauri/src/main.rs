@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    orbit_github_nav_lib::run();
+    wbit_lib::run();
 }

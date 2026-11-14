@@ -167,7 +167,7 @@
 
   function payload() {
     return {
-      app: 'orbit', version: 1, updatedAt: new Date().toISOString(),
+      app: 'wbit', version: 1, updatedAt: new Date().toISOString(),
       favorites: state.favorites, recent: state.recent.slice(0, 20),
       settings: { theme: state.settings.theme, view: state.settings.view, sort: state.settings.sort },
     };

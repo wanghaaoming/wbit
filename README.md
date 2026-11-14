@@ -380,9 +380,7 @@ https://wanghaaoming.github.io/wbit/
 
 这就是 GitHub 给你的**二级域名**，永久免费、自带 HTTPS。此外还有一份已发布的同源镜像 `https://wbit.app.workbuddy.host/`。
 
-> **关于 GitHub Actions**：本次推送使用的令牌没有 `workflow` scope，因此 `.github/workflows/` 下的 3 个工作流文件没有随仓库提交；完整内容保存在 `docs/github-actions/*.yml.txt`（站内文档中心也能查看）。需要自动更新索引、构建安装包或改用 Actions 部署时，二选一：
-> 1. `gh auth refresh -h github.com -s workflow`，然后 `node scripts/push-via-api.mjs --with-workflows` 一键补齐；
-> 2. 在 GitHub 网页把备份文件复制回 `.github/workflows/` 并去掉 `.txt` 后缀。
+> **关于 GitHub Actions**：`.github/workflows/` 下的 4 个工作流已随仓库提交并正常触发（`deploy-pages.yml` 自动部署、`update-data.yml` 每周更新索引、`update-tutorials.yml` 每周采集教程、`build-desktop.yml` 构建全平台安装包）。早期推送时令牌缺少 `workflow` scope，`docs/github-actions/` 下曾保留 3 份 `.txt` 备份，现已删除——直接看 `.github/workflows/` 即可。
 网站、手机 PWA、电脑客户端共用同一份 `site/` 代码，界面一模一样。
 
 > 用了自定义域名？把 `site/config.js` 里的 `siteUrl` 填上即可。
@@ -446,7 +444,6 @@ Github导航站/
 │   ├── COMMERCIAL_AGREEMENT_TEMPLATE.md     ← 可填写的签署版模板（中文为准）
 │   ├── COMMERCIAL_AGREEMENT_TEMPLATE.en.md  ← English execution template
 │   ├── GROWTH_PLAYBOOK.md      ← 增长执行手册
-│   └── github-actions/         ← 3 个工作流文件的 .txt 备份
 ├── index.html / .nojekyll       ← GitHub Pages 根跳转与静态托管标记
 ├── assets/                     ← social-preview.svg（源文件）/ .png（上传用）
 ├── preview/                    ← 桌面 / 手机预览图
@@ -487,6 +484,7 @@ Github导航站/
 │   └── src-tauri/              ← Rust 配置、图标、窗口权限
 └── .github/workflows/
     ├── update-data.yml         ← 每周自动更新仓库索引
+    ├── update-tutorials.yml    ← 每周自动采集优质教程
     ├── deploy-pages.yml        ← 自动部署 GitHub Pages
     └── build-desktop.yml       ← 构建全平台安装包
 ```

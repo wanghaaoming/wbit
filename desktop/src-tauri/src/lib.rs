@@ -1,4 +1,4 @@
-//! Orbit 桌面端：把 site/ 静态站点原样装进原生窗口。
+//! WBit 桌面端：把 site/ 静态站点原样装进原生窗口。
 //! 网站、PWA、桌面端共用同一份前端代码与同一套数据层。
 
 /// 用系统默认浏览器打开外部链接（项目主页、GitHub、论文等）。
@@ -34,5 +34,5 @@ pub fn run() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![open_external])
         .run(tauri::generate_context!())
-        .expect("启动 Orbit 失败");
+        .expect("启动 WBit 失败");
 }

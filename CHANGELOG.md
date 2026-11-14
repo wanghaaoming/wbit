@@ -3,6 +3,20 @@
 本项目的所有显著变更记录在此文件中。
 格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.2.1] - 2026-11-15
+
+### 修复
+- **教程页移动端标签挤压换行**：`#/tutorials` 在 390px 窄屏下，搜索框行内 `max-width:280px;min-width:200px` 的优先级高于媒体查询里的 `min-width:100%`，仍强占 200px，把分组标签条压到 122px；`.chip` 又缺少 `white-space:nowrap`，导致 7 个标签各自换行、行高被撑成两行。现将布局样式移出内联 style（新增 `.tuto-toolbar` 类），`.chip` 加 `white-space:nowrap` + `flex:0 0 auto`，`.chip-scroll` 加 `min-width:0`，窄屏下搜索框独立成行、标签条横向滚动，标签高度稳定在 28px
+
+### 内部
+- 自检构建标记 `__ORBIT_BUILD__` 更新为 `wbit-1.2.1`，`config.version` 同步 `1.2.1`
+- Service Worker 缓存版本提升为 `wbit-shell-v3`，确保已装 PWA 能拉取到新样式
+- 桌面端版本号与站点对齐（`desktop/package.json`、`tauri.conf.json`、`Cargo.toml` 均为 `1.2.1`）
+- Rust crate 品牌更名：`orbit-github-nav` → `wbit`，`[lib] name` → `wbit_lib`（`main.rs` 同步）；`description` / `authors` / 注释一并改为 WBit。`identifier` 保留 `cn.orbit.githubnav` 不动，避免已安装用户的应用数据目录变更
+- 同步数据 Gist 载荷的 `app` 字段由 `orbit` 改为 `wbit`（旧数据仍可正常读取，`version` 未变）
+- 清理仓库：删除 `docs/github-actions/*.yml.txt`（3 份已过期的 workflow 备份，其中 `build-desktop.yml.txt` 仍写着上游 `Orbit-*` 产物名）；`preview/audit.json` 与 `preview/live.png` 是 `perf-audit.mjs` / `check-live.mjs` 的运行副产物，改为不再入库并加入 `.gitignore`
+- README 更新：修正「工作流未随仓库提交」的过期说明，目录树补上 `update-tutorials.yml`
+
 ## [1.2.0] - 2026-11-14
 
 ### 新增
