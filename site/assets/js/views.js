@@ -312,7 +312,7 @@
     return `
       <section class="hero">
         <div class="eyebrow">${esc(CFG.slogan || '发现值得用的开源项目')}</div>
-        <h1 class="display">GitHub 上不缺好项目，<br><span class="gradient-text">缺的是找到它的方式。</span></h1>
+        <h1 class="display">给你一份 GitHub 的<br><span class="gradient-text">精选清单。</span></h1>
         <p class="hero-lede">WBit 自动收录 GitHub 优质仓库，按主题分类、按星标分层，并把 AI 工具、社区、博客与论文放在同一个地方。免登录使用，收藏可选跨端同步。</p>
         <div class="hero-search">
           ${icon('search', 21)}
