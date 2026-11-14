@@ -135,6 +135,17 @@
   <!-- 云服务 SDK 异步注入：不阻塞首屏渲染；加载完成后通知 cloud.js 初始化 -->
   <script>
     (function () {
+      var sdkSupported = false;
+      try {
+        new Function('class __WBitSdkProbe__ { static { window.__wbitProbe = 1; } }');
+        sdkSupported = true;
+      } catch (e) { sdkSupported = false; }
+      if (!sdkSupported) {
+        window.__ORBIT_SDK_FAILED__ = true;
+        window.__ORBIT_SDK_UNSUPPORTED__ = true;
+        document.dispatchEvent(new Event('orbit:sdk-failed'));
+        return;
+      }
       var s = document.createElement('script');
       s.src = 'https://cdn.jsdelivr.net/npm/@tencent-ai/workbuddy-cloud-sdk@dev/lib/index.global.js';
       s.async = true;
