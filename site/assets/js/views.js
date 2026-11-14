@@ -499,12 +499,12 @@
     const autoUpdated = TUTO_AUTO.updatedAt;
     return `${pageHead('教程', '从零读懂 AI 编程 Agent',
       `汇集 GitHub 与官方文档里的优质教程，重点是「编程 Agent」这条线：怎么选、怎么用、怎么自己造。共 ${total} 份资源，人工精选 + 自动采集双轨更新。`)}
-      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:22px">
+      <div class="tuto-toolbar">
         <div class="chip-scroll">
           <button class="chip ${cur === 'all' ? 'active' : ''}" data-act="tuto-group" data-v="all">全部 ${total}</button>
           ${groups.map((g) => `<button class="chip ${cur === g.id ? 'active' : ''}" data-act="tuto-group" data-v="${esc(g.id)}">${esc(g.title.split(' · ')[0])}${g.auto ? '（自动）' : ''} ${g.items.length}</button>`).join('')}
         </div>
-        <div class="search-inline" style="max-width:280px;min-width:200px">${icon('search', 16)}<input id="aiSearch" type="search" placeholder="在教程里筛选…" autocomplete="off"></div>
+        <div class="search-inline">${icon('search', 16)}<input id="aiSearch" type="search" placeholder="在教程里筛选…" autocomplete="off"></div>
       </div>
       <div id="aiGroups">
       ${shown.map((g) => `
