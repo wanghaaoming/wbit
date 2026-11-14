@@ -210,37 +210,98 @@
       return `\n@@ORBITCODE${i}@@\n`;
     });
     const safeUrl = (u) => /^(https?:\/\/|mailto:|#|\/|\.\/)/i.test(u) ? u : '#';
-    const inline = (t) => esc(t)
-      .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (_, alt, u) => `<img class="md-img" src="${safeUrl(u)}" alt="${alt}" loading="lazy">`)
-      .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, label, u) => `<a href="${safeUrl(u)}" target="_blank" rel="noopener noreferrer">${label}</a>`)
-      .replace(/`([^`]+)`/g, '<code class="md-inline">$1</code>')
-      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-      .replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, '$1<em>$2</em>');
-
+    // 行内解析：先保护行内代码，避免其中内容被粗体/斜体/链接等规则二次改写
+    const inline = (t) => {
+      const spans = [];
+      let s = esc(t).replace(/`([^`]+)`/g, (_, c) => {
+        const i = spans.push('<code class="md-inline">' + c + '</code>') - 1;
+        return `\u0000${i}\u0000`;
+      });
+      s = s
+        .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (_, alt, u) => `<img class="md-img" src="${safeUrl(u)}" alt="${alt}" loading="lazy">`)
+        .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, label, u) => `<a href="${safeUrl(u)}" target="_blank" rel="noopener noreferrer">${label}</a>`)
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, '$1<em>$2</em>');
+      return s.replace(/\u0000(\d+)\u0000/g, (_, i) => spans[Number(i)] || '');
+    };
+    // 表格：| 单元格 | 行 + 分隔行才识别为表格，否则按普通段落渲染
+    const splitRow = (l) => l.replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|').map((c) => c.trim());
+    const isSepRow = (cells) => cells.length > 0 && cells.every((c) => /^:?-+:?$/.test(c));
+    const alignCls = (c) => c.startsWith(':') && c.endsWith(':') ? ' md-tac' : c.endsWith(':') ? ' md-tar' : '';
+    const renderTable = (buf) => {
+      const rows = buf.map(splitRow);
+      const sepIdx = rows.findIndex(isSepRow);
+      if (sepIdx < 1) return null;
+      const aligns = rows[sepIdx].map(alignCls);
+      const cell = (c, i, tag) => `<${tag} class="md-td${tag === 'th' ? (aligns[i] || '') : ''}">${inline(c)}</${tag}>`;
+      const head = rows[sepIdx - 1].map((c, i) => cell(c, i, 'th')).join('');
+      const body = rows.slice(sepIdx + 1)
+        .filter((r) => !isSepRow(r) && r.length)
+        .map((r) => `<tr class="md-tr">${r.map((c, i) => cell(c, i, 'td')).join('')}</tr>`)
+        .join('');
+      return `<div class="md-table-wrap"><table class="md-table"><thead class="md-thead"><tr class="md-tr">${head}</tr></thead><tbody class="md-tbody">${body}</tbody></table></div>`;
+    };
     const out = [];
-    let inList = false;
-    const closeList = () => { if (inList) { out.push('</ul>'); inList = false; } };
+    const tableBuf = [];
+    const listStack = []; // { indent, tag, liOpen }：支持有序/无序列表与一层缩进嵌套
+    const closeLists = (indent) => {
+      while (listStack.length && listStack[listStack.length - 1].indent >= indent) {
+        const top = listStack.pop();
+        if (top.liOpen) out.push('</li>');
+        out.push(top.tag === 'ol' ? '</ol>' : '</ul>');
+      }
+    };
+    const openList = (indent, tag) => {
+      listStack.push({ indent, tag, liOpen: false });
+      out.push(tag === 'ol' ? '<ol class="md-ol">' : '<ul class="md-ul">');
+    };
+    const flushTable = () => {
+      if (!tableBuf.length) return;
+      const html = renderTable(tableBuf);
+      closeLists(0);
+      if (html) out.push(html);
+      else for (const tl of tableBuf) out.push(`<p class="md-p">${inline(tl)}</p>`);
+      tableBuf.length = 0;
+    };
     for (const raw of text.split('\n')) {
       const l = raw.trimEnd();
       const codeMatch = l.trim().match(/^@@ORBITCODE(\d+)@@$/);
-      if (codeMatch) { closeList(); out.push(codes[Number(codeMatch[1])] || ''); continue; }
-      if (!l.trim()) { closeList(); continue; }
+      if (codeMatch) { flushTable(); closeLists(0); out.push(codes[Number(codeMatch[1])] || ''); continue; }
+      if (!l.trim()) { flushTable(); closeLists(0); continue; }
+      if (/^\s*\|.*\|/.test(l)) { tableBuf.push(l); continue; }
+      flushTable();
       let m;
       if ((m = l.match(/^(#{1,6})\s+(.*)$/))) {
-        closeList();
+        closeLists(0);
         const h = Math.min(m[1].length + 2, 6);
         out.push(`<h${h} class="md-h">${inline(m[2])}</h${h}>`); continue;
       }
-      if (/^\s*(---|\*\*\*|___)\s*$/.test(l)) { closeList(); out.push('<hr class="md-hr">'); continue; }
-      if (/^\s*[-*+]\s+/.test(l)) {
-        if (!inList) { out.push('<ul class="md-ul">'); inList = true; }
-        out.push(`<li>${inline(l.replace(/^\s*[-*+]\s+/, ''))}</li>`); continue;
+      if (/^\s*(---|\*\*\*|___)\s*$/.test(l)) { closeLists(0); out.push('<hr class="md-hr">'); continue; }
+      if (/^\s*>\s?/.test(l)) { closeLists(0); out.push(`<blockquote class="md-quote">${inline(l.replace(/^\s*>\s?/, ''))}</blockquote>`); continue; }
+      if ((m = l.match(/^(\s*)([-*+]|\d+[.)])\s+(.*)$/))) {
+        const indent = m[1].replace(/\t/g, '  ').length;
+        const tag = /^[-*+]$/.test(m[2]) ? 'ul' : 'ol';
+        const top = listStack[listStack.length - 1];
+        if (!top) openList(indent, tag);
+        else if (top.indent > indent || (top.indent === indent && top.tag !== tag)) closeLists(indent);
+        // 缩进更深时不开新层级前先保持上层 li 未闭合，让嵌套列表进入 <li> 内
+        const cur = listStack[listStack.length - 1];
+        if (!cur || cur.indent !== indent) openList(indent, tag);
+        else if (cur.liOpen) { cur.liOpen = false; out.push('</li>'); }
+        const lvl = listStack[listStack.length - 1];
+        let content = m[3];
+        let task = '';
+        const tm = content.match(/^\[([ xX])\]\s+/);
+        if (tm) { task = `<span class="md-task-box${tm[1] === ' ' ? '' : ' md-task-done'}"></span>`; content = content.slice(tm[0].length); }
+        out.push(`<li class="md-li${tm ? ' md-task' : ''}">${task}${inline(content)}`);
+        lvl.liOpen = true;
+        continue;
       }
-      if (/^\s*>\s?/.test(l)) { closeList(); out.push(`<blockquote class="md-quote">${inline(l.replace(/^\s*>\s?/, ''))}</blockquote>`); continue; }
-      closeList();
+      closeLists(0);
       out.push(`<p class="md-p">${inline(l)}</p>`);
     }
-    closeList();
+    flushTable();
+    closeLists(0);
     return `<div class="md-body">${out.join('')}</div>`;
   }
 

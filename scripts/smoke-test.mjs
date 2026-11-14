@@ -392,7 +392,7 @@ else {
       issues: document.querySelectorAll('a[href*="/issues"]').length,
       undisclosed: (document.getElementById('view').textContent || '').includes('未公开')
     })`);
-    check(contact.hero && /DaiYi/.test(contact.name) && contact.channels >= 5 && contact.feedback === 3 && contact.issues >= 2 && contact.undisclosed,
+    check(contact.hero && /戴亿|wanghaaoming|WBit/i.test(contact.name) && contact.channels >= 5 && contact.feedback === 3 && contact.issues >= 2 && contact.undisclosed,
       `联系开发者整页（${contact.channels} 个渠道 / ${contact.feedback} 类反馈 / 未公开项明确标注）`);
     await evaluate(`location.hash = '#/repos'`); await sleep(300);
 
