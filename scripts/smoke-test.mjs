@@ -278,7 +278,7 @@ else {
 
     // 交互：命令面板 → 搜索 → 收藏 → 主题
     const build = await evaluate(`window.__ORBIT_BUILD__`);
-    check(build === 'orbit-1.0.0', '页面加载的是最新版本脚本：' + build);
+    check(build === 'wbit-1.1.0', '页面加载的是最新版本脚本：' + build);
     await evaluate(`location.hash = '#/repos'`); await sleep(300);
     await evaluate(`document.getElementById('topSearchBtn').click()`);
     await sleep(200);

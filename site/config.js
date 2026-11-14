@@ -58,5 +58,5 @@ window.__GH_NAV_CONFIG__ = {
 
   // 数据自动更新周期（由 .github/workflows/update-data.yml 保证）
   refreshDays: 7,
-  version: '1.0.0',
+  version: '1.1.0',
 };
