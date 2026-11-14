@@ -1,0 +1,77 @@
+{
+  "target": "https://daiyiqq.github.io/orbit-github-nav/",
+  "at": "2026-11-10T04:43:13.735Z",
+  "cold": {
+    "dcl": 0,
+    "load": 0,
+    "fcp": 692,
+    "resources": 8,
+    "transferKB": 56,
+    "decodedKB": 54,
+    "biggest": [
+      {
+        "name": "index.global.js",
+        "kb": 18
+      },
+      {
+        "name": "app.css",
+        "kb": 13
+      },
+      {
+        "name": "docs.js",
+        "kb": 9
+      },
+      {
+        "name": "catalog.js",
+        "kb": 8
+      }
+    ]
+  },
+  "warm": {
+    "dcl": 150,
+    "load": 151,
+    "fcp": 124,
+    "resources": 21,
+    "transferKB": 0,
+    "decodedKB": 1516,
+    "biggest": [
+      {
+        "name": "repos.js",
+        "kb": 1135
+      },
+      {
+        "name": "app.css",
+        "kb": 73
+      },
+      {
+        "name": "views.js",
+        "kb": 73
+      },
+      {
+        "name": "app.js",
+        "kb": 49
+      }
+    ]
+  },
+  "improvement": {
+    "fcpMs": 568,
+    "loadMs": -151,
+    "transferKB": 56
+  },
+  "a11y": {
+    "skipLink": true,
+    "images": 15,
+    "imagesMissingAlt": 0,
+    "buttons": 39,
+    "buttonsMissingName": 0,
+    "ariaLive": 1,
+    "description": "自动收录 3265 个 GitHub 优质仓库，按分类与星标整理，发现值得用的开源项目。",
+    "canonical": "https://daiyiqq.github.io/orbit-github-nav#/discover",
+    "ogTitle": "发现 · Orbit GitHub 导航站",
+    "repoCount": 3265,
+    "rawHydrated": true,
+    "errorBoundary": true
+  },
+  "consoleErrors": [],
+  "consoleErrorCount": 0
+}

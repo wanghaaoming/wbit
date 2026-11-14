@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /?sharecode=
+
+Sitemap: https://wanghaaoming.github.io/wbit/sitemap.xml
