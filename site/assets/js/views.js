@@ -5,6 +5,8 @@
   const { icon, esc, fmtNum, fmtFull, timeAgo, langColor, highlight, domain } = G;
   const CFG = w.__GH_NAV_CONFIG__ || {};
   const CATALOG = w.__GH_NAV_CATALOG__ || {};
+  const TUTORIALS = w.__GH_NAV_TUTORIALS__ || { groups: [] };
+  const TUTO_AUTO = w.__GH_NAV_TUTORIALS_AUTO__ || { groups: [] };
   const SRC = w.GHSource || {
     listDir: () => [], formatSize: (n) => String(n || 0) + ' B',
     fileKind: () => ({ kind: 'code', icon: 'code', color: '#7C5CFF' }),
@@ -21,7 +23,7 @@
   const S = {
     q: '', cat: 'all', lang: 'all', tier: 'all', sort: 'stars', view: 'grid',
     page: 1, perPage: 24, license: 'all', active: 'all', remote: false,
-    rankTier: '100k', readingTab: 'papers', remoteResults: [], remoteLoading: false,
+    rankTier: '100k', readingTab: 'papers', tutoGroup: 'all', remoteResults: [], remoteLoading: false,
     trendDays: 30, drawerTab: 'overview',
     source: {
       repo: '', branch: '', branches: [], tree: [], dir: '', path: '', content: '',
@@ -44,6 +46,7 @@
     ]},
     { group: 'AI 专区', items: [
       { id: 'ai', label: 'AI 导航', icon: 'sparkles', href: '#/ai', badge: 'AI' },
+      { id: 'tutorials', label: '教程', icon: 'graduation', href: '#/tutorials', badge: 'NEW' },
       { id: 'community', label: 'AI 社区', icon: 'users', href: '#/community' },
       { id: 'reading', label: '博客 & 论文', icon: 'book', href: '#/reading' },
     ]},
@@ -91,7 +94,7 @@
   }
 
   function tabbarHtml(active) {
-    const map = { repos: 'discover', ranking: 'discover', category: 'categories', community: 'ai', reading: 'ai', feature: 'ai' };
+    const map = { repos: 'discover', ranking: 'discover', category: 'categories', community: 'ai', reading: 'ai', tutorials: 'ai', feature: 'ai' };
     const cur = map[active] || active;
     return TABS.map((t) => `
       <a href="${t.href}" class="${cur === t.id ? 'active' : ''}">
@@ -305,7 +308,7 @@
       { id: 'skills', icon: 'blocks', color: '#30B0C7', title: 'Skills 技能包', sub: '让 Agent 学会新本领', href: '#/feature/skills' },
       { id: 'agent', icon: 'bot', color: '#FF7A45', title: 'AI Agent', sub: '开源智能体框架', href: '#/feature/agent' },
     ];
-    const aiTools = (CATALOG.aiNav[0]?.items || []).slice(0, 8);
+    const aiTools = (CATALOG.aiNav?.[0]?.items || []).slice(0, 8);
     return `
       <section class="hero">
         <div class="eyebrow">${esc(CFG.slogan || '发现值得用的开源项目')}</div>
@@ -377,6 +380,7 @@
     return (c.aiNav || []).reduce((a, g) => a + g.items.length, 0)
       + (c.community || []).reduce((a, g) => a + g.items.length, 0)
       + (c.blogs || []).length + (c.papers || []).length
+      + tutorialGroups().reduce((a, g) => a + g.items.length, 0)
       + Object.values(c.featured || {}).reduce((a, f) => a + (f.links || []).length, 0);
   }
 
@@ -477,6 +481,42 @@
           <span class="tag" style="position:absolute;right:14px;top:14px">${esc(b.t)}</span></a>`).join('')}</div>`
       : `<div class="tool-grid">${(sites?.items || []).map((x) => toolCard(x, '#AF52DE')).join('')}</div>`}
     `;
+  }
+
+  /* ── 页面：教程 ─────────────────────────────────── */
+  function tutorialGroups() {
+    const manual = (TUTORIALS.groups || []).map((g) => ({ ...g, auto: false }));
+    /* 自动组的 id 可能与精选组重名（mcp / prompt / dev…），加前缀保证分组唯一 */
+    const auto = (TUTO_AUTO.groups || []).map((g) => ({ ...g, id: `auto-${g.id}`, auto: true }));
+    return manual.concat(auto);
+  }
+
+  function tutorialsPage() {
+    const groups = tutorialGroups();
+    const cur = S.tutoGroup;
+    const shown = cur === 'all' ? groups : groups.filter((g) => g.id === cur);
+    const total = groups.reduce((a, g) => a + g.items.length, 0);
+    const autoUpdated = TUTO_AUTO.updatedAt;
+    return `${pageHead('教程', '从零读懂 AI 编程 Agent',
+      `汇集 GitHub 与官方文档里的优质教程，重点是「编程 Agent」这条线：怎么选、怎么用、怎么自己造。共 ${total} 份资源，人工精选 + 自动采集双轨更新。`)}
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:22px">
+        <div class="chip-scroll">
+          <button class="chip ${cur === 'all' ? 'active' : ''}" data-act="tuto-group" data-v="all">全部 ${total}</button>
+          ${groups.map((g) => `<button class="chip ${cur === g.id ? 'active' : ''}" data-act="tuto-group" data-v="${esc(g.id)}">${esc(g.title.split(' · ')[0])}${g.auto ? '（自动）' : ''} ${g.items.length}</button>`).join('')}
+        </div>
+        <div class="search-inline" style="max-width:280px;min-width:200px">${icon('search', 16)}<input id="aiSearch" type="search" placeholder="在教程里筛选…" autocomplete="off"></div>
+      </div>
+      <div id="aiGroups">
+      ${shown.map((g) => `
+        ${sectionHead(g.title, g.desc || '', '')}
+        <div class="tool-grid">${g.items.map((it) => toolCard(it, g.color)).join('')}</div>`).join('')}
+      </div>
+      ${!shown.length ? `<div class="empty-state"><div class="empty-icon">${icon('graduation', 44)}</div><h3>这一组还没有内容</h3><p>换个分类看看，或者直接搜索关键词。</p></div>` : ''}
+      <div style="font-size:11px;color:var(--text-4);line-height:1.7;margin-top:26px">
+        精选清单人工维护于 <code>site/data/tutorials.js</code>${autoUpdated ? `，自动采集结果更新于 ${esc(autoUpdated)}` : ''}。
+        采集脚本 <code>scripts/fetch-tutorials.mjs</code> 会按 topic 与星标从 GitHub 拉取教程类仓库，可由工作流定期刷新。
+        链接均指向官方文档或 GitHub 仓库，遇到失效链接欢迎在 Issues 反馈。
+      </div>`;
   }
 
   /* ── 页面：专题（MCP / Skills / Agent / 开源） ───── */
@@ -966,6 +1006,7 @@ npm run tauri build     # 生成各平台安装包
         { icon: 'compass', name: '发现', sub: '首页推荐与热门项目', href: '#/discover' },
         { icon: 'grid', name: '全部仓库', sub: '搜索与筛选', href: '#/repos' },
         { icon: 'sparkles', name: 'AI 导航', sub: '精选 AI 工具', href: '#/ai' },
+        { icon: 'graduation', name: '教程', sub: '编程 Agent 与 AI 教程合集', href: '#/tutorials' },
         { icon: 'plug', name: 'MCP 生态', sub: '协议与服务端', href: '#/feature/mcp' },
         { icon: 'book', name: '博客 & 论文', sub: '经典论文与技术博客', href: '#/reading' },
         { icon: 'flame', name: '趋势榜', sub: '最近还在维护的高星项目', href: '#/trending' },
@@ -992,6 +1033,7 @@ npm run tauri build     # 生成各平台安装包
       { icon: 'user', name: '账号与登录', sub: '邮箱 / 手机验证码、GitHub 连接', href: '#/account', kw: '登录 账号 验证码 注册 login' },
       { icon: 'star', name: '星标榜单', sub: '按 Star 分层', href: '#/ranking', kw: '榜单 排名 star 排行' },
       { icon: 'users', name: 'AI 社区', sub: '去有人讨论的地方', href: '#/community', kw: '社区 论坛 讨论' },
+      { icon: 'graduation', name: '教程合集', sub: '编程 Agent 官方文档、自建 Agent、中文资源', href: '#/tutorials', kw: '教程 tutorial 学习 入门 agent 编程助手 文档' },
     ].filter((p) => match(`${p.name} ${p.sub} ${p.kw}`));
     if (pages.length) groups.push({ title: '页面', items: pages });
 
@@ -999,6 +1041,10 @@ npm run tauri build     # 生成各平台安装包
     (CATALOG.aiNav || []).forEach((g) => g.items.forEach((it) => { if (match(`${it.n} ${it.d} ${it.t}`)) tools.push({ icon: 'sparkles', name: it.n, sub: it.d, href: it.u, external: true }); }));
     (CATALOG.community || []).forEach((g) => g.items.forEach((it) => { if (match(`${it.n} ${it.d}`)) tools.push({ icon: 'users', name: it.n, sub: it.d, href: it.u, external: true }); }));
     if (tools.length) groups.push({ title: 'AI 导航 / 社区', items: tools.slice(0, 5) });
+
+    const tutos = [];
+    tutorialGroups().forEach((g) => g.items.forEach((it) => { if (match(`${it.n} ${it.d} ${it.t || ''}`)) tutos.push({ icon: 'graduation', name: it.n, sub: it.d, href: it.u, external: true }); }));
+    if (tutos.length) groups.push({ title: '教程', items: tutos.slice(0, 5) });
 
     const reads = [];
     (CATALOG.papers || []).forEach((p) => { if (match(`${p.n} ${p.d} ${p.t}`)) reads.push({ icon: 'book', name: p.n, sub: p.d, href: p.u, external: true }); });
@@ -1017,7 +1063,7 @@ npm run tauri build     # 生成各平台安装包
     S, NAV, TABS, REPOS, META, CATEGORIES, CAT_MAP, TIERS, CATALOG, byFullName,
     navHtml, tabbarHtml, filterRepos, repoGridHtml, drawerHtml, cmdkData, toolCard,
     discover, reposPage, categoriesPage, rankingPage, trendingPage, guidePage, sourcePage,
-    aiNavPage, communityPage, readingPage, featurePage, favoritesPage,
+    aiNavPage, communityPage, tutorialsPage, readingPage, featurePage, favoritesPage,
     installPage, settingsPage, notFound,
   };
 })(window);

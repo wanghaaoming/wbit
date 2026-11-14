@@ -2,7 +2,7 @@
   "id": "./",
   "name": "WBit · GitHub 导航站",
   "short_name": "WBit",
-  "description": "自动收录 GitHub 优质仓库，按分类与星标整理，集成 AI 导航、AI 社区、博客与论文，支持搜索、筛选、收藏、分享与跨端同步。",
+  "description": "自动收录 GitHub 优质仓库，按分类与星标整理，集成 AI 导航、AI 社区、教程合集、博客与论文，支持搜索、筛选、收藏、分享与跨端同步。",
   "lang": "zh-CN",
   "dir": "ltr",
   "start_url": "./",
@@ -22,6 +22,7 @@
   "shortcuts": [
     { "name": "发现", "short_name": "发现", "description": "首页推荐与热门项目", "url": "./#/discover", "icons": [{ "src": "./assets/icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "AI 导航", "short_name": "AI", "description": "精选 AI 工具与平台", "url": "./#/ai", "icons": [{ "src": "./assets/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "教程", "short_name": "教程", "description": "编程 Agent 与 AI 教程合集", "url": "./#/tutorials", "icons": [{ "src": "./assets/icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "MCP 生态", "short_name": "MCP", "description": "MCP 协议与服务端目录", "url": "./#/feature/mcp", "icons": [{ "src": "./assets/icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "我的收藏", "short_name": "收藏", "description": "查看收藏的项目", "url": "./#/favorites", "icons": [{ "src": "./assets/icons/icon-192.png", "sizes": "192x192" }] }
   ],

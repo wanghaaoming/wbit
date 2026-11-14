@@ -1,7 +1,7 @@
 /* WBit · 应用控制器：路由、事件委托、命令面板、安装与同步交互 */
 (function (w) {
   'use strict';
-  w.__ORBIT_BUILD__ = 'wbit-1.1.0';   // 供自检脚本确认页面加载的是最新版本
+  w.__ORBIT_BUILD__ = 'wbit-1.2.0';   // 供自检脚本确认页面加载的是最新版本
   const G = w.GH;
   const V = G.Views;
   const S = V.S;
@@ -14,7 +14,7 @@
   const PAGES = w.GHPages;
   const DOCS = w.__ORBIT_DOCS__ || { files: [] };
   const PAGE_DESC = {
-    discover: '自动收录 3265 个 GitHub 优质仓库，按分类与星标整理，发现值得用的开源项目。',
+    discover: '自动收录 3385 个 GitHub 优质仓库，按分类与星标整理，发现值得用的开源项目。',
     repos: '搜索与筛选 GitHub 开源仓库：分类、语言、星标区间、更新时间与许可证。',
     categories: '按 16 个主题浏览 GitHub 开源项目。',
     ranking: '按星标分层浏览 GitHub 高星项目榜单。',
@@ -26,6 +26,7 @@
     source: '浏览 GitHub 仓库源代码、文件树、README、提交与 Releases。',
     repo: '查看开源项目完整详情、README、统计、许可证与 GitHub 入口。',
     ai: '精选 AI 工具导航：对话、编程、图像、开源模型与效率工具。',
+    tutorials: 'GitHub 优质教程合集，含编程 Agent 官方文档、自建 Agent 框架与中文资源。',
     community: 'AI 与开源社区入口：论坛、讨论区与学术站点。',
     reading: '技术博客与经典论文，含 arXiv 原文链接。',
     favorites: '我收藏的 GitHub 开源项目。',
@@ -108,6 +109,7 @@
       case 'account': html = PAGES.accountPage(); title = '账号与登录'; break;
       case 'contact': html = PAGES.contactPage(); title = '维护与联系'; break;
       case 'ai': html = V.aiNavPage(); title = 'AI 导航'; break;
+      case 'tutorials': html = V.tutorialsPage(); title = '教程'; break;
       case 'community': html = V.communityPage(); title = 'AI 社区'; break;
       case 'reading': html = V.readingPage(); title = '博客 & 论文'; break;
       case 'feature': html = V.featurePage(r.param); title = (V.CATALOG.featured[r.param] || {}).title || '专题'; break;
@@ -801,6 +803,7 @@
       case 'jump-tier': S.tier = v; S.cat = 'all'; S.q = ''; S.page = 1; go('#/repos'); break;
       case 'rank-tier': S.rankTier = v; S.page = 1; render({ keepScroll: true }); break;
       case 'reading-tab': S.readingTab = v; render({ keepScroll: true }); break;
+      case 'tuto-group': S.tutoGroup = v; render({ keepScroll: true }); break;
       case 'load-more': S.page += 1; render({ keepScroll: true }); break;
       case 'filter-view':
         S.view = v; Store.setSetting('view', v); render({ keepScroll: true }); break;

@@ -1,0 +1,60 @@
+name: 自动采集 GitHub 优质教程
+
+# 教程栏目分两层：
+#   site/data/tutorials.js      人工精选（含编程 Agent 官方文档），由人维护，不被覆盖
+#   site/data/tutorials-auto.js 本工作流自动采集的补充来源，只做增量补充
+# 采集脚本会跳过人工精选里已出现的链接与已归档仓库，所以自动结果不会与精选重复。
+
+on:
+  schedule:
+    - cron: '0 4 * * 1'          # 每周一 04:00 UTC，紧接仓库索引更新之后
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: update-tutorials
+  cancel-in-progress: false
+
+jobs:
+  tutorials:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 采集教程仓库
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/fetch-tutorials.mjs
+
+      - name: 校验采集结果
+        run: |
+          node -e "
+            const data = require('./site/data/tutorials-auto.json');
+            const total = (data.groups || []).reduce((a, g) => a + (g.items || []).length, 0);
+            if (!data.groups || !data.groups.length) throw new Error('未采集到任何教程分组');
+            if (total < 20) throw new Error('教程数量异常: ' + total);
+            console.log('教程校验通过:', data.groups.length, '个分组,', total, '条教程');
+          "
+
+      - name: 提交更新后的教程数据
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "orbit-index-bot"
+          git config user.email "orbit-index-bot@users.noreply.github.com"
+          git add site/data/tutorials-auto.js site/data/tutorials-auto.json
+          if git diff --staged --quiet; then
+            echo "教程数据无变化，跳过提交"
+          else
+            git commit -m "chore: 自动更新 GitHub 优质教程"
+            git push
+            # GITHUB_TOKEN 触发的 push 不会再触发其它工作流，显式触发 Pages 部署
+            gh workflow run deploy-pages.yml || echo "请检查 Pages 工作流权限"
+          fi

@@ -44,11 +44,12 @@ See [the Chinese README](README.md) for the full feature boundary and cloud/doma
 
 | Feature | Details |
 | --- | --- |
-| Curated index | **3265 real repositories** across 16 topics; filter by category, language, star range, last update, license, 6 sort orders |
+| Curated index | **3385 real repositories** across 16 topics; filter by category, language, star range, last update, license, 6 sort orders |
 | Star tiers & trends | 100k / 50k / 10k / 5k / 1k tiers; projects active in the last 7 / 30 / 90 days |
 | Full project page | Rendered README, star / fork / issue counts, license, ZIP download, clone command, 8 deep links into GitHub, contribution steps, related projects |
 | Source browser | Branch switch, file tree, syntax highlighting with line numbers, per-file copy / download, commits / issues / releases |
 | AI & ecosystem | Chat assistants, coding tools, image / video / audio, open models, AI communities, MCP / Skills / Agent / open-source picks |
+| Tutorials | Curated GitHub tutorials: coding-agent official docs, building your own agent, prompt & context engineering, MCP tooling, Chinese resources, general programming; grouped filters and search; refreshed by `scripts/fetch-tutorials.mjs` |
 | Blogs & papers | 18 engineering blogs, 20 classic papers (with arXiv source) |
 | Search | ⌘K command palette (repos / categories / tools / papers) + live GitHub-wide search for long-tail repositories |
 | Favorites & sync | Heart favorites, share, JSON import / export; optional cloud sync after email / SMS code sign-in |

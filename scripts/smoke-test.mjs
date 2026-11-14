@@ -39,7 +39,7 @@ check(readmeSource.includes('开发者联系信息') && readmeSource.includes('g
 const swSource = fs.readFileSync(path.join(SITE, 'sw.js'), 'utf8');
 check(['motion.js', 'docs.js', 'a11y.js', 'robots.txt', 'sitemap.xml'].every((x) => swSource.includes(x))
   && swSource.includes('stale-while-revalidate'), '离线预缓存清单与分级缓存已更新');
-const files = ['config.js', 'data/catalog.js', 'data/docs.js', 'data/repos.js', 'assets/js/core.js', 'assets/js/store.js', 'assets/js/source.js', 'assets/js/views.js', 'assets/js/pages.js'];
+const files = ['config.js', 'data/catalog.js', 'data/tutorials.js', 'data/tutorials-auto.js', 'data/docs.js', 'data/repos.js', 'assets/js/core.js', 'assets/js/store.js', 'assets/js/source.js', 'assets/js/views.js', 'assets/js/pages.js'];
 
 function makeSandbox() {
   const store = new Map();
@@ -103,6 +103,7 @@ const pages = [
   ['账号中心', () => ctx.window.GHPages.accountPage()],
   ['联系开发者', () => ctx.window.GHPages.contactPage()],
   ['AI 导航', () => V.aiNavPage()],
+  ['教程栏目', () => V.tutorialsPage()],
   ['AI 社区', () => V.communityPage()],
   ['博客与论文', () => V.readingPage()],
   ['MCP 专题', () => V.featurePage('mcp')],
@@ -265,7 +266,7 @@ else {
     })()`);
     check(tiltOk === true || tiltOk === 'skip', `卡片跟随鼠标微倾${tiltOk === 'skip' ? '（触屏环境跳过）' : ''}`);
 
-    const routes = ['repos', 'category/ai', 'categories', 'ranking', 'trending', 'guide', 'docs', 'account', 'contact', 'ai', 'community', 'reading', 'feature/mcp', 'favorites', 'install', 'settings'];
+    const routes = ['repos', 'category/ai', 'categories', 'ranking', 'trending', 'guide', 'docs', 'account', 'contact', 'ai', 'tutorials', 'community', 'reading', 'feature/mcp', 'favorites', 'install', 'settings'];
     const routeResults = [];
     for (const r of routes) {
       await evaluate(`location.hash = '#/${r}'`);
@@ -278,7 +279,7 @@ else {
 
     // 交互：命令面板 → 搜索 → 收藏 → 主题
     const build = await evaluate(`window.__ORBIT_BUILD__`);
-    check(build === 'wbit-1.1.0', '页面加载的是最新版本脚本：' + build);
+    check(build === 'wbit-1.2.0', '页面加载的是最新版本脚本：' + build);
     await evaluate(`location.hash = '#/repos'`); await sleep(300);
     await evaluate(`document.getElementById('topSearchBtn').click()`);
     await sleep(200);
