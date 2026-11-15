@@ -15,6 +15,10 @@
       <stop offset="0" stop-color="#2f6bff" stop-opacity="0.42"/>
       <stop offset="1" stop-color="#2f6bff" stop-opacity="0"/>
     </radialGradient>
+    <linearGradient id="markBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2660EB"/><stop offset="0.55" stop-color="#00BEFF"/><stop offset="1" stop-color="#23E6A0"/>
+    </linearGradient>
+    <clipPath id="markClip"><rect width="40" height="40" rx="9"/></clipPath>
   </defs>
 
   <rect width="1280" height="640" fill="url(#bg)"/>
@@ -29,6 +33,16 @@
   <circle cx="1080" cy="140" r="7" fill="#8fb6ff"/>
   <circle cx="1330" cy="140" r="5" fill="#8fb6ff" fill-opacity="0.65"/>
   <circle cx="1080" cy="390" r="4" fill="#8fb6ff" fill-opacity="0.5"/>
+
+  <!-- brand mark -->
+  <g transform="translate(88 58) scale(1.5)">
+    <g clip-path="url(#markClip)">
+      <rect width="40" height="40" fill="url(#markBg)"/>
+      <path d="M5.57 26.43A15.80 6.00 -24 0 0 34.43 13.57" fill="none" stroke="#0B3A6E" stroke-opacity="0.34" stroke-width="1.25"/>
+      <path d="M 9.31 12.22 L 15.44 29.60 L 20.00 18.34 L 24.56 29.60 L 30.69 12.22 L 28.71 11.58 L 24.44 26.60 L 20.00 16.26 L 15.56 26.60 L 11.29 11.58 Z" fill="#fff"/>
+      <path d="M5.57 26.43A15.80 6.00 -24 0 1 34.43 13.57" fill="none" stroke="#0B3A6E" stroke-opacity="0.62" stroke-width="1.25"/>
+    </g>
+  </g>
 
   <!-- left accent bar -->
   <rect x="88" y="150" width="6" height="258" rx="3" fill="url(#accent)"/>
