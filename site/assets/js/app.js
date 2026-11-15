@@ -1,7 +1,7 @@
 /* WBit · 应用控制器：路由、事件委托、命令面板、安装与同步交互 */
 (function (w) {
   'use strict';
-  w.__ORBIT_BUILD__ = 'wbit-1.2.1';   // 供自检脚本确认页面加载的是最新版本
+  w.__ORBIT_BUILD__ = 'wbit-1.3.0';   // 供自检脚本确认页面加载的是最新版本
   const G = w.GH;
   const V = G.Views;
   const S = V.S;
@@ -80,7 +80,7 @@
     let html = '', title = '发现', detailRepo = null;
 
     switch (r.name) {
-      case 'discover': html = V.discover(); title = '发现'; break;
+      case 'discover': html = V.discover(); title = 'GitHub 精选'; break;
       case 'repos':
         S.cat = 'all';
         S.tier = S.tier || 'all';

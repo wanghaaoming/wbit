@@ -38,11 +38,12 @@
 
   const NAV = [
     { group: '发现', items: [
-      { id: 'discover', label: '发现', icon: 'compass', href: '#/discover' },
+      { id: 'discover', label: 'GitHub 精选', icon: 'compass', href: '#/discover' },
       { id: 'repos', label: '全部仓库', icon: 'grid', href: '#/repos' },
       { id: 'categories', label: '分类浏览', icon: 'layers', href: '#/categories' },
       { id: 'ranking', label: '星标榜单', icon: 'star', href: '#/ranking' },
       { id: 'trending', label: '趋势榜', icon: 'flame', href: '#/trending' },
+      { id: 'compare', label: '项目对比', icon: 'layers', href: '#/compare', cmpCount: true, badge: 'NEW' },
       { id: 'whatsnew', label: '新收录', icon: 'clock', href: '#/whatsnew' },
     ]},
     { group: 'AI 专区', items: [
@@ -65,14 +66,13 @@
     { group: '我的', items: [
       { id: 'account', label: '账号与登录', icon: 'user', href: '#/account' },
       { id: 'favorites', label: '我的收藏', icon: 'heart', href: '#/favorites', count: true },
-      { id: 'compare', label: '项目对比', icon: 'layers', href: '#/compare', cmpCount: true },
       { id: 'settings', label: '设置', icon: 'settings', href: '#/settings' },
       { id: 'contact', label: '维护与联系', icon: 'link', href: '#/contact' },
     ]},
   ];
 
   const TABS = [
-    { id: 'discover', label: '发现', icon: 'compass', href: '#/discover' },
+    { id: 'discover', label: '精选', icon: 'compass', href: '#/discover' },
     { id: 'categories', label: '分类', icon: 'layers', href: '#/categories' },
     { id: 'ai', label: 'AI', icon: 'sparkles', href: '#/ai' },
     { id: 'favorites', label: '收藏', icon: 'heart', href: '#/favorites' },

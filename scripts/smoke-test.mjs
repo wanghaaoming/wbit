@@ -164,6 +164,15 @@ if (!chrome) { console.log('  · 未找到 Chrome/Edge，跳过浏览器检查')
 else {
   let proc = null;
   try {
+    // 第 2 部分要求本地站点已在 BASE（默认 127.0.0.1:4173）运行；
+    // 先探测一次，避免页面导航失败后只报一句难懂的 "Uncaught"。
+    try {
+      const probe = await fetch(BASE + '/', { method: 'HEAD' });
+      if (!probe.ok) throw new Error('HTTP ' + probe.status);
+    } catch (e) {
+      throw new Error('本地站点未在 ' + BASE + ' 运行（' + e.message + '）'
+        + ' —— 请先执行 install.bat（或 node scripts/install.mjs --no-open），再运行自检');
+    }
     proc = spawn(chrome, [
       '--headless=new', '--disable-gpu', '--no-sandbox', '--hide-scrollbars',
       '--no-first-run', '--no-default-browser-check', '--disable-extensions',
@@ -279,7 +288,7 @@ else {
 
     // 交互：命令面板 → 搜索 → 收藏 → 主题
     const build = await evaluate(`window.__ORBIT_BUILD__`);
-    check(build === 'wbit-1.2.1', '页面加载的是最新版本脚本：' + build);
+    check(build === 'wbit-1.3.0', '页面加载的是最新版本脚本：' + build);
     await evaluate(`location.hash = '#/repos'`); await sleep(300);
     await evaluate(`document.getElementById('topSearchBtn').click()`);
     await sleep(200);

@@ -5,7 +5,7 @@
  * 预缓存清单覆盖站点全部本地资源，首次安装后整个网站可离线打开。
  * 路径均相对 sw.js 所在目录，兼容 GitHub Pages 二级域名 /<repo>/ 子路径。
  */
-const CACHE = 'wbit-shell-v3';
+const CACHE = 'wbit-shell-v4';
 const INDEX_URL = new URL('./index.html', self.registration.scope).href;
 const SHELL = [
   './', './index.html', './config.js', './cloud-config.js', './manifest.webmanifest',

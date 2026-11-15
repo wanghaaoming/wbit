@@ -3,10 +3,33 @@
 本项目的所有显著变更记录在此文件中。
 格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
-## [未发布]
+## [1.3.0] - 2026-11-15
+
+### 新增
+- **收藏导出 Markdown 清单**：收藏页新增按钮，按分类分组、组内按星标排序，含链接、星标、语言、许可证与描述，可直接放进 README 或笔记
+- **收藏分享链接**（`#/shared?favs=...`）：把收藏编码进 URL，复制即可分享；新增「分享的收藏」页，支持一键把他人分享的项目加入自己的收藏（自动去重、只提示新增数量），索引外的项目给出 GitHub 直达链接
+- **项目对比**（`#/compare`）：详情页新增「加入对比」按钮，最多同时对比 6 个项目；对比页并排展示星标（最高值高亮）、Forks、开放 Issues、语言、许可证、最近提交、创建时间、状态、分类与简介；侧栏「发现」分组提供入口（带 `NEW` 标识与数量徽标）
+- **新收录页**（`#/whatsnew`）：`scripts/fetch-repos.mjs` 每次运行产出增量快照 `site/data/whats-new.{js,json}`（与上一版索引对比得出新增 / 移除；首次运行或索引重建标记为基线，不把整库当成新增；保留最近 12 次），页面展示新增项目与更新记录时间线
+- **项目详情页 README 自动目录**：从渲染后的 README 提取 `#` / `##` / `###` 标题生成目录（少于 3 个标题时不显示），点击平滑滚动到对应小节
 
 ### 变更
+- 首页入口由「发现」更名为「**GitHub 精选**」（侧栏、移动端标签栏与页面标题同步）
 - 首页主视觉文案由「GitHub 上不缺好项目，缺的是找到它的方式。」改为「给你一份 GitHub 的精选清单。」，强调站点提供的是已筛选的清单，而非又一个搜索入口
+
+### 修复
+- 项目导出文件名前缀由 `orbit-favorites-*.json` 更正为 `wbit-favorites-*.json`
+- 分享图 `assets/social-preview.svg` 内残留的 `Orbit` 品牌字样与旧仓库地址（`DaiYiqq/orbit-github-nav`）更正为 WBit 与当前仓库；图片中的仓库数量 `3265` 更正为 `3385`，并重新导出 `social-preview.png`
+
+### 合规
+- 删除 `COMMERCIAL-LICENSE.md` 与 `docs/` 下的商业许可模板、增长手册：商业许可只能由版权人授予，本衍生项目无权提供或据此收费
+- `site/config.js` 的 `developer` 段移除原作者姓名、头像与私人联系方式（Telegram / QQ），联系渠道只保留 GitHub 主页 / 项目仓库 / Issues；`README.md`、`README.en.md`、`CONTRIBUTING.md`、站内文档与 `scripts/push-via-api.mjs` 的提交署名同步清理
+- 按 GPL-3.0 要求保留上游署名：README 新增「上游与致谢」章节与版权声明，联系页、站内文档与项目信息栏标注上游项目
+
+### 内部
+- `core.js` 的 `mdToHtml` 为每个标题注入稳定 id（`md-sec-N`）；页面使用 hash 路由，目录跳转走 `data-act` 而非 `#id` 锚点
+- `store.js` 新增 `compare` 状态与 `addFavs` / `isCompared` / `toggleCompare` / `removeCompare` / `clearCompare`
+- Service Worker 预缓存清单加入 `site/data/whats-new.js`
+- `scripts/smoke-test.mjs` 的联系页断言同步更新（渠道数 3、去掉「未公开」项）
 
 ## [1.2.1] - 2026-11-15
 
