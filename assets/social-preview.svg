@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
-  <title id="title">Orbit · GitHub 导航站</title>
-  <desc id="desc">Brand card for Orbit, a Chinese GitHub navigation site. Not a screenshot.</desc>
+  <title id="title">WBit · GitHub 导航站</title>
+  <desc id="desc">Brand card for WBit, a Chinese GitHub navigation site. Not a screenshot.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0b1220"/>
@@ -36,7 +36,7 @@
   <!-- brand name -->
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
     <text x="132" y="222" fill="#8fb6ff" font-size="26" font-weight="600" letter-spacing="6">GITHUB NAVIGATION</text>
-    <text x="128" y="330" fill="#ffffff" font-size="104" font-weight="700" letter-spacing="-2">Orbit</text>
+    <text x="128" y="330" fill="#ffffff" font-size="104" font-weight="700" letter-spacing="-2">WBit</text>
     <text x="132" y="386" fill="#c8d6ee" font-size="30" font-weight="500">GitHub 导航站 · 发现值得用的开源项目</text>
     <text x="132" y="440" fill="#8ea3c4" font-size="22">自动收录、分类、按星标整理 · 不用登录，打开就能用</text>
   </g>
