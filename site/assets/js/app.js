@@ -64,6 +64,7 @@
     const map = {
       category: 'categories', ranking: 'discover', repos: 'discover', trending: 'discover',
       repo: 'discover', guide: 'settings', docs: 'settings', account: 'settings', contact: 'settings',
+      shared: 'favorites',
     };
     return map[route.name] || route.name;
   }
@@ -114,6 +115,11 @@
       case 'reading': html = V.readingPage(); title = '博客 & 论文'; break;
       case 'feature': html = V.featurePage(r.param); title = (V.CATALOG.featured[r.param] || {}).title || '专题'; break;
       case 'favorites': html = V.favoritesPage(); title = '我的收藏'; break;
+      case 'shared': {
+        const names = (r.params.get('favs') || '').split(',').map((s) => s.trim()).filter(Boolean);
+        html = V.sharedFavsPage(names); title = '分享的收藏';
+        break;
+      }
       case 'settings': html = V.settingsPage(); title = '设置'; break;
       default: html = V.notFound(); title = '页面不存在';
     }
@@ -626,6 +632,17 @@
     toast('已导出 Markdown 清单');
   }
 
+  /* 生成收藏分享链接：把收藏编码进 URL，无需后端即可分享给他人 */
+  function shareFavs() {
+    const favs = Store.state.favorites;
+    if (!favs.length) { toast('还没有收藏，先收几个再分享'); return; }
+    if (favs.length > 80) { toast('收藏较多（' + favs.length + ' 个），分享链接请控制在 80 个以内'); return; }
+    const url = siteUrl() + '#/shared?favs=' + encodeURIComponent(favs.join(','));
+    copy(url)
+      .then(() => toast('分享链接已复制，发给朋友即可'))
+      .catch(() => { openUrl(url); toast('已打开分享页，可复制地址栏链接'); });
+  }
+
   function installModal() {
     const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
     openModal(`<h3>把 WBit 装到设备</h3>
@@ -747,6 +764,13 @@
       case 'disconnect': Cloud.disconnect(); updateAccountUI(); render(); break;
       case 'export': exportData(); break;
       case 'export-md': exportMarkdown(); break;
+      case 'share-favs': shareFavs(); break;
+      case 'adopt-shared': {
+        const added = Store.addFavs((v || '').split(',').filter(Boolean));
+        toast(added ? ('已加入 ' + added + ' 个收藏') : '这些项目都已收藏过');
+        render({ keepScroll: true });
+        break;
+      }
       case 'import': importModal(); break;
       case 'submit-import': {
         const txt = ($('#importText') || {}).value;

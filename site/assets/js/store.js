@@ -54,6 +54,13 @@
     emit('favorites'); cloudSchedule();
   }
   function clearFavs() { state.favorites = []; emit('favorites'); cloudSchedule(); }
+  function addFavs(names) {
+    const add = (names || []).map(String).filter((f) => f && state.favorites.indexOf(f) === -1);
+    if (!add.length) return 0;
+    state.favorites = add.concat(state.favorites);
+    emit('favorites'); cloudSchedule();
+    return add.length;
+  }
 
   /* ── 最近访问 ─────────────────────────────────────── */
   function addRecent(fullName) {
@@ -257,7 +264,7 @@
 
   w.GH.Store = {
     get state() { return state; },
-    on, emit, save, isFav, toggleFav, removeFav, clearFavs, addRecent,
+    on, emit, save, isFav, toggleFav, removeFav, clearFavs, addFavs, addRecent,
     setSetting, applyTheme, exportData, importData, syncStatus,
   };
   w.GH.Cloud = { connectWithToken, deviceFlow, syncNow, pull, push, disconnect, findGist };

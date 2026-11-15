@@ -549,6 +549,7 @@
         <button class="btn" data-act="sync">${icon('sync', 15)} 立即同步</button>
         <button class="btn" data-act="export">${icon('download', 15)} 导出收藏</button>
         <button class="btn" data-act="export-md">${icon('code', 15)} 导出 Markdown</button>
+        <button class="btn" data-act="share-favs">${icon('share', 15)} 分享收藏</button>
         <button class="btn" data-act="import">${icon('upload', 15)} 导入收藏</button>
         ${favs.length ? `<button class="btn btn-ghost" data-act="clear-favs">${icon('trash', 15)} 清空</button>` : ''}
       </div>
@@ -561,6 +562,27 @@
           <div class="rr-main"><b>${esc(f)}</b><p>在 GitHub 上打开</p></div>${icon('arrow-up-right', 16)}
           <button class="icon-btn" data-act="fav" data-f="${esc(f)}">${icon('x', 15)}</button></a>`).join('')}</div>` : ''}
       ${recent.length ? `${sectionHead('最近浏览', '', '')}<div class="repo-grid">${recent.slice(0, 6).map((r) => repoCard(r)).join('')}</div>` : ''}`;
+  }
+
+  /* ── 页面：他人分享的收藏 ─────────────────────────── */
+  function sharedFavsPage(names) {
+    const list = names.map((f) => byFullName[f]).filter(Boolean);
+    const missing = names.filter((f) => !byFullName[f]);
+    const mine = w.GH.Store.state.favorites;
+    const fresh = names.filter((f) => mine.indexOf(f) === -1);
+    return `${pageHead('分享的收藏', `${names.length} 个项目`, '这是别人分享给你的收藏清单，无需登录即可查看。可以把还没收藏的项目一键加进自己的收藏。')}
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px">
+        ${fresh.length
+          ? `<button class="btn btn-primary" data-act="adopt-shared" data-v="${esc(names.join(','))}">${icon('heart', 15)} 全部加入我的收藏（${fresh.length} 个新增）</button>`
+          : `<span class="btn btn-ghost" style="cursor:default">${icon('info', 15)} 这些项目都在你的收藏里了</span>`}
+        <button class="btn" data-act="share-favs">${icon('share', 15)} 分享我的收藏</button>
+        <a class="btn" href="#/favorites">${icon('heart', 15)} 我的收藏</a>
+      </div>
+      ${list.length ? `<div class="repo-grid">${list.map((r, i) => repoCard(r, { delay: i * 25 })).join('')}</div>` : ''}
+      ${missing.length ? `${sectionHead('索引外的项目', '不在当前索引里，点击可直接在 GitHub 打开')}
+        <div class="repo-list">${missing.map((f) => `<a class="repo-row" href="https://github.com/${esc(f)}" target="_blank" rel="noopener noreferrer">
+          <div class="rr-main"><b>${esc(f)}</b><p>在 GitHub 上打开</p></div>${icon('arrow-up-right', 16)}</a>`).join('')}</div>` : ''}
+      ${!names.length ? `<div class="empty-state"><h3>这个分享链接没有内容</h3><p>链接里没有带项目列表，请向分享者索取完整链接。</p><a class="btn btn-primary" href="#/repos">去逛逛仓库</a></div>` : ''}`;
   }
 
   /* ── 页面：安装（全平台） ───────────────────────── */
@@ -1064,7 +1086,7 @@ npm run tauri build     # 生成各平台安装包
     S, NAV, TABS, REPOS, META, CATEGORIES, CAT_MAP, TIERS, CATALOG, byFullName,
     navHtml, tabbarHtml, filterRepos, repoGridHtml, drawerHtml, cmdkData, toolCard,
     discover, reposPage, categoriesPage, rankingPage, trendingPage, guidePage, sourcePage,
-    aiNavPage, communityPage, tutorialsPage, readingPage, featurePage, favoritesPage,
+    aiNavPage, communityPage, tutorialsPage, readingPage, featurePage, favoritesPage, sharedFavsPage,
     installPage, settingsPage, notFound,
   };
 })(window);
