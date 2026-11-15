@@ -548,6 +548,7 @@
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px">
         <button class="btn" data-act="sync">${icon('sync', 15)} 立即同步</button>
         <button class="btn" data-act="export">${icon('download', 15)} 导出收藏</button>
+        <button class="btn" data-act="export-md">${icon('code', 15)} 导出 Markdown</button>
         <button class="btn" data-act="import">${icon('upload', 15)} 导入收藏</button>
         ${favs.length ? `<button class="btn btn-ghost" data-act="clear-favs">${icon('trash', 15)} 清空</button>` : ''}
       </div>

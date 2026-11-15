@@ -584,10 +584,46 @@
     const blob = new Blob([Store.exportData()], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'orbit-favorites-' + new Date().toISOString().slice(0, 10) + '.json';
+    a.download = 'wbit-favorites-' + new Date().toISOString().slice(0, 10) + '.json';
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
     toast('收藏已导出');
+  }
+
+  /* 导出收藏为 Markdown 清单：便于放进 README、笔记，或直接分享给他人 */
+  function exportMarkdown() {
+    const favs = Store.state.favorites;
+    const known = favs.map((f) => V.byFullName[f]).filter(Boolean);
+    const unknown = favs.filter((f) => !V.byFullName[f]);
+    const date = new Date().toISOString().slice(0, 10);
+    const kfmt = (n) => { n = Number(n) || 0; return n >= 1000 ? (Math.round(n / 100) / 10) + 'k' : String(n); };
+    const catName = (k) => (V.CAT_MAP[k] || {}).label || k;
+    const groups = {};
+    known.forEach((r) => { const k = (r.cat && r.cat[0]) || 'other'; (groups[k] = groups[k] || []).push(r); });
+    const out = [
+      '# WBit 收藏清单', '',
+      `> 导出自 [WBit · GitHub 导航站](${siteUrl()}) · ${date} · 共 ${favs.length} 个项目`, '',
+    ];
+    Object.keys(groups).sort((a, b) => groups[b].length - groups[a].length).forEach((k) => {
+      out.push('## ' + catName(k), '');
+      groups[k].slice().sort((a, b) => (b.s || 0) - (a.s || 0)).forEach((r) => {
+        out.push(`- **[${r.f}](https://github.com/${r.f})** — ★ ${kfmt(r.s)}${r.l ? ' · ' + r.l : ''}${r.lic ? ' · ' + r.lic : ''}`);
+        if (r.d) out.push(`  ${r.d}`);
+      });
+      out.push('');
+    });
+    if (unknown.length) {
+      out.push('## 索引外的收藏', '');
+      unknown.forEach((f) => out.push(`- [${f}](https://github.com/${f})`));
+      out.push('');
+    }
+    const blob = new Blob([out.join('\n')], { type: 'text/markdown;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'wbit-favorites-' + date + '.md';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    toast('已导出 Markdown 清单');
   }
 
   function installModal() {
@@ -710,6 +746,7 @@
       case 'sync': Cloud.syncNow().then((ok) => { if (ok) render({ keepScroll: true }); }); break;
       case 'disconnect': Cloud.disconnect(); updateAccountUI(); render(); break;
       case 'export': exportData(); break;
+      case 'export-md': exportMarkdown(); break;
       case 'import': importModal(); break;
       case 'submit-import': {
         const txt = ($('#importText') || {}).value;
