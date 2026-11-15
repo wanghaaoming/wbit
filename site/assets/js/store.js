@@ -13,6 +13,7 @@
 
   const DEFAULT = {
     favorites: [],          // full_name 数组
+    compare: [],            // 待对比的 full_name 数组
     recent: [],             // { f, at }
     settings: { theme: 'light', view: 'grid', sort: 'stars', perPage: 24 },
     account: null,          // { login, avatar, token, gistId, mode }
@@ -25,6 +26,7 @@
     s.settings = Object.assign({}, DEFAULT.settings, raw.settings || {});
     // 兼容旧格式（曾存过数字 id）
     s.favorites = (s.favorites || []).map((x) => String(x));
+    s.compare = (s.compare || []).map((x) => String(x));
     return s;
   }
 
@@ -61,6 +63,22 @@
     emit('favorites'); cloudSchedule();
     return add.length;
   }
+
+  /* ── 项目对比（最多 6 个，仅存本机）───────────────── */
+  const COMPARE_MAX = 6;
+  function isCompared(fullName) { return state.compare.indexOf(fullName) > -1; }
+  function toggleCompare(fullName) {
+    const i = state.compare.indexOf(fullName);
+    if (i > -1) { state.compare.splice(i, 1); toast('已移出对比'); }
+    else {
+      if (state.compare.length >= COMPARE_MAX) { toast('最多同时对比 ' + COMPARE_MAX + ' 个项目'); return false; }
+      state.compare.push(fullName); toast('已加入对比');
+    }
+    emit('compare');
+    return i === -1;
+  }
+  function removeCompare(fullName) { state.compare = state.compare.filter((x) => x !== fullName); emit('compare'); }
+  function clearCompare() { state.compare = []; emit('compare'); }
 
   /* ── 最近访问 ─────────────────────────────────────── */
   function addRecent(fullName) {
@@ -264,7 +282,8 @@
 
   w.GH.Store = {
     get state() { return state; },
-    on, emit, save, isFav, toggleFav, removeFav, clearFavs, addFavs, addRecent,
+    on, emit, save, isFav, toggleFav, removeFav, clearFavs, addFavs,
+    isCompared, toggleCompare, removeCompare, clearCompare, addRecent,
     setSetting, applyTheme, exportData, importData, syncStatus,
   };
   w.GH.Cloud = { connectWithToken, deviceFlow, syncNow, pull, push, disconnect, findGist };

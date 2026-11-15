@@ -64,6 +64,7 @@
     { group: '我的', items: [
       { id: 'account', label: '账号与登录', icon: 'user', href: '#/account' },
       { id: 'favorites', label: '我的收藏', icon: 'heart', href: '#/favorites', count: true },
+      { id: 'compare', label: '项目对比', icon: 'layers', href: '#/compare', cmpCount: true },
       { id: 'settings', label: '设置', icon: 'settings', href: '#/settings' },
       { id: 'contact', label: '维护与联系', icon: 'link', href: '#/contact' },
     ]},
@@ -80,6 +81,7 @@
   /* ── 通用片段 ─────────────────────────────────────── */
   function navHtml(active) {
     const favCount = w.GH.Store.state.favorites.length;
+    const cmpCount = (w.GH.Store.state.compare || []).length;
     return NAV.map((g) => `
       <div class="nav-group">
         <div class="nav-group-title">${esc(g.group)}</div>
@@ -89,6 +91,7 @@
             <span>${esc(it.label)}</span>
             ${it.badge ? `<span class="nav-badge">${esc(it.badge)}</span>` : ''}
             ${it.count && favCount ? `<span class="nav-count">${favCount}</span>` : ''}
+            ${it.cmpCount && cmpCount ? `<span class="nav-count">${cmpCount}</span>` : ''}
           </a>`).join('')}
       </div>`).join('');
   }
@@ -583,6 +586,58 @@
         <div class="repo-list">${missing.map((f) => `<a class="repo-row" href="https://github.com/${esc(f)}" target="_blank" rel="noopener noreferrer">
           <div class="rr-main"><b>${esc(f)}</b><p>在 GitHub 上打开</p></div>${icon('arrow-up-right', 16)}</a>`).join('')}</div>` : ''}
       ${!names.length ? `<div class="empty-state"><h3>这个分享链接没有内容</h3><p>链接里没有带项目列表，请向分享者索取完整链接。</p><a class="btn btn-primary" href="#/repos">去逛逛仓库</a></div>` : ''}`;
+  }
+
+  /* ── 页面：项目对比（最多 6 个）───────────────────── */
+  function comparePage() {
+    const names = w.GH.Store.state.compare || [];
+    const list = names.map((f) => byFullName[f]).filter(Boolean);
+    const missing = names.filter((f) => !byFullName[f]);
+    if (!names.length) {
+      return `${pageHead('项目对比', '还没有加入对比的项目', '在任意项目详情页点「加入对比」，最多可同时比较 6 个项目。')}
+        <div class="empty-state"><div class="empty-icon">${icon('layers', 44)}</div><h3>对比清单是空的</h3>
+        <p>打开任意项目详情页，点「加入对比」把候选项目放进来，再回到这里横向比较星标、活跃度与许可证。</p>
+        <a class="btn btn-primary" href="#/repos">去挑几个项目</a></div>`;
+    }
+    const maxStars = Math.max.apply(null, list.map((r) => Number(r.s) || 0));
+    const cells = (fn, best) => list.map((r) => {
+      const v = fn(r);
+      const hit = best && list.length > 1 && Number(v) === best;
+      return `<td${hit ? ' class="cmp-best"' : ''}>${v === '' || v == null ? '—' : v}</td>`;
+    }).join('');
+    const rows = [
+      ['★ Stars', (r) => fmtNum(r.s), maxStars],
+      ['Forks', (r) => fmtNum(r.fk)],
+      ['开放 Issues', (r) => fmtNum(r.is)],
+      ['语言', (r) => esc(r.l || '未标注')],
+      ['许可证', (r) => esc(r.lic || '未标注')],
+      ['最近提交', (r) => timeAgo(r.p)],
+      ['创建时间', (r) => esc(r.c || '—')],
+      ['状态', (r) => (r.a ? '已归档' : '活跃')],
+      ['分类', (r) => (r.cat || []).map((k) => (CAT_MAP[k] || {}).label).filter(Boolean).join('、') || '—'],
+      ['简介', (r) => esc(r.d || '—')],
+    ];
+    return `${pageHead('项目对比', `${list.length} 个项目并排比较`, '把候选项目放在一起看星标、活跃度、许可证与语言，方便选型。数据来自本地索引，不额外消耗 GitHub API 额度。')}
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+        <a class="btn" href="#/repos">继续挑项目</a>
+        <button class="btn btn-ghost" data-act="clear-compare">${icon('trash', 15)} 清空对比</button>
+      </div>
+      <div class="panel" style="overflow-x:auto">
+        <table class="cmp-table">
+          <thead><tr><th>对比项</th>${list.map((r) => `<th class="cmp-col">
+            <a href="#/repo?f=${encodeURIComponent(r.f)}" class="cmp-head">
+              <img src="https://github.com/${esc(r.o)}.png?size=64" alt="" loading="lazy" onerror="this.style.visibility='hidden'">
+              <span>${esc(r.f)}</span></a>
+            <button class="icon-btn" data-act="cmp-remove" data-f="${esc(r.f)}" title="移出对比">${icon('x', 13)}</button>
+          </th>`).join('')}</tr></thead>
+          <tbody>${rows.map((row) => `<tr><th>${row[0]}</th>${cells(row[1], row[2])}</tr>`).join('')}</tbody>
+        </table>
+      </div>
+      ${missing.length ? `${sectionHead('索引外的项目', '不在当前索引里，可在 GitHub 打开或移出对比')}
+        <div class="repo-list">${missing.map((f) => `<div class="repo-row">
+          <div class="rr-main"><b>${esc(f)}</b><p>不在本地索引中</p></div>
+          <a class="btn btn-sm" href="https://github.com/${esc(f)}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <button class="icon-btn" data-act="cmp-remove" data-f="${esc(f)}">${icon('x', 15)}</button></div>`).join('')}</div>` : ''}`;
   }
 
   /* ── 页面：安装（全平台） ───────────────────────── */
@@ -1086,7 +1141,7 @@ npm run tauri build     # 生成各平台安装包
     S, NAV, TABS, REPOS, META, CATEGORIES, CAT_MAP, TIERS, CATALOG, byFullName,
     navHtml, tabbarHtml, filterRepos, repoGridHtml, drawerHtml, cmdkData, toolCard,
     discover, reposPage, categoriesPage, rankingPage, trendingPage, guidePage, sourcePage,
-    aiNavPage, communityPage, tutorialsPage, readingPage, featurePage, favoritesPage, sharedFavsPage,
+    aiNavPage, communityPage, tutorialsPage, readingPage, featurePage, favoritesPage, sharedFavsPage, comparePage,
     installPage, settingsPage, notFound,
   };
 })(window);

@@ -1023,3 +1023,21 @@ a.contact-card:hover { transform: translateY(-3px); border-color: rgba(0, 113, 2
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* ── 项目对比表 ───────────────────────────────────── */
+.cmp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.cmp-table th, .cmp-table td { padding: 10px 12px; text-align: center; border-bottom: 1px solid rgba(128,128,128,.18); vertical-align: top; }
+.cmp-table thead th { font-weight: 600; font-size: 12px; }
+.cmp-table tbody th { text-align: left; color: var(--text-3); font-weight: 500; white-space: nowrap; }
+.cmp-table tbody tr:last-child th, .cmp-table tbody tr:last-child td { border-bottom: 0; }
+.cmp-table .cmp-head { display: flex; flex-direction: column; align-items: center; gap: 7px; text-decoration: none; color: inherit; }
+.cmp-table .cmp-head img { width: 34px; height: 34px; border-radius: 9px; background: rgba(128,128,128,.12); }
+.cmp-table .cmp-head span { font-size: 12px; font-weight: 600; word-break: break-all; line-height: 1.35; }
+.cmp-table .cmp-col { min-width: 132px; position: relative; padding-top: 16px; }
+.cmp-table .cmp-col .icon-btn { position: absolute; top: 5px; right: 5px; }
+.cmp-table .cmp-best { color: var(--orange); font-weight: 700; }
+@media (max-width: 680px) {
+  .cmp-table { font-size: 12px; }
+  .cmp-table th, .cmp-table td { padding: 8px 9px; }
+  .cmp-table .cmp-col { min-width: 108px; }
+}

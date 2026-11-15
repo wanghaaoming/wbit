@@ -55,6 +55,7 @@
     const zip = 'https://codeload.github.com/' + r.f + '/zip/HEAD';
     const cats = (r.cat || []).map((k) => CAT_MAP[k]).filter(Boolean);
     const faved = G.Store.isFav(r.f);
+    const compared = G.Store.isCompared(r.f);
     const related = REPOS.filter((x) => x.f !== r.f && (x.cat || []).some((c) => (r.cat || []).includes(c))).slice(0, 6);
 
     const intro = `<div class="detail-intro">
@@ -110,6 +111,7 @@
           <a class="btn btn-primary" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${icon('github', 15)} 在 GitHub 打开</a>
           <a class="btn" href="#/source?repo=${encodeURIComponent(r.f)}">${icon('code', 15)} 浏览源代码</a>
           <button class="btn ${faved ? 'faved' : ''}" data-act="fav" data-f="${esc(r.f)}">${icon('heart', 15)} ${faved ? '已收藏' : '收藏'}</button>
+          <button class="btn ${compared ? 'faved' : ''}" data-act="compare" data-f="${esc(r.f)}">${icon('layers', 15)} ${compared ? '已加入对比' : '加入对比'}</button>
           <button class="btn" data-act="share" data-f="${esc(r.f)}">${icon('share', 15)} 分享</button>
           <a class="btn btn-ghost" href="${esc(zip)}" target="_blank" rel="noopener noreferrer">${icon('download', 15)} 下载 ZIP</a>
           <button class="btn btn-ghost" data-act="copy" data-v="git clone ${esc(url)}.git">${icon('copy', 15)} 复制 clone</button>

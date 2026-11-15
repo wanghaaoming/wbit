@@ -115,6 +115,7 @@
       case 'reading': html = V.readingPage(); title = '博客 & 论文'; break;
       case 'feature': html = V.featurePage(r.param); title = (V.CATALOG.featured[r.param] || {}).title || '专题'; break;
       case 'favorites': html = V.favoritesPage(); title = '我的收藏'; break;
+      case 'compare': html = V.comparePage(); title = '项目对比'; break;
       case 'shared': {
         const names = (r.params.get('favs') || '').split(',').map((s) => s.trim()).filter(Boolean);
         html = V.sharedFavsPage(names); title = '分享的收藏';
@@ -765,6 +766,9 @@
       case 'export': exportData(); break;
       case 'export-md': exportMarkdown(); break;
       case 'share-favs': shareFavs(); break;
+      case 'compare': Store.toggleCompare(f); render({ keepScroll: true }); break;
+      case 'cmp-remove': Store.removeCompare(f); render({ keepScroll: true }); break;
+      case 'clear-compare': Store.clearCompare(); render({ keepScroll: true }); break;
       case 'adopt-shared': {
         const added = Store.addFavs((v || '').split(',').filter(Boolean));
         toast(added ? ('已加入 ' + added + ' 个收藏') : '这些项目都已收藏过');
