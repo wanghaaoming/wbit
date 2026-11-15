@@ -20,6 +20,10 @@ node_modules/
 desktop/src-tauri/target/
 desktop/node_modules/
 
+# Python 缓存（运行 gen-icons.py 会生成）
+__pycache__/
+*.pyc
+
 # 编辑器
 .vscode/
 .idea/
