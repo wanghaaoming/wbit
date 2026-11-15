@@ -113,8 +113,6 @@
 - [维护者与开发者联系信息](#维护者与开发者联系信息)
 - [贡献指南（社区共同维护）](#贡献指南社区共同维护)
 - [License](#license)
-- [商业许可（可选）](#商业许可可选)
-- [商业许可协议全文](COMMERCIAL-LICENSE.md)
 
 ---
 
@@ -439,11 +437,6 @@ Github导航站/
 ├── README.en.md                ← 英文精简版
 ├── CONTRIBUTING.md             ← 社区共同维护：协作约定 / Issue / PR 流程
 ├── LICENSE                     ← GPL-3.0 许可证全文
-├── COMMERCIAL-LICENSE.md       ← 可选商业许可协议（双许可 / 申请流程）
-├── docs/
-│   ├── COMMERCIAL_AGREEMENT_TEMPLATE.md     ← 可填写的签署版模板（中文为准）
-│   ├── COMMERCIAL_AGREEMENT_TEMPLATE.en.md  ← English execution template
-│   ├── GROWTH_PLAYBOOK.md      ← 增长执行手册
 ├── index.html / .nojekyll       ← GitHub Pages 根跳转与静态托管标记
 ├── assets/                     ← social-preview.svg（源文件）/ .png（上传用）
 ├── preview/                    ← 桌面 / 手机预览图
@@ -573,21 +566,18 @@ A：不会。只使用 GitHub 公开 API 的仓库信息（名称、描述、星
 
 | 项目 | 内容 |
 | --- | --- |
-| 项目发起人 / 维护者 | **戴亿**（GitHub `@wanghaaoming`） |
+| 维护者 | WBit（GitHub `@wanghaaoming`） |
 | 维护方式 | 社区共同维护 · 协作约定见 [CONTRIBUTING.md](CONTRIBUTING.md) |
 | GitHub 主页 | https://github.com/wanghaaoming |
 | 项目仓库 | https://github.com/wanghaaoming/wbit |
 | GitHub Pages | https://wanghaaoming.github.io/wbit/ |
 | Issues（推荐） | https://github.com/wanghaaoming/wbit/issues |
-| Telegram（个人号） | [@daiyi520](https://t.me/daiyi520) |
-| Telegram（频道） | https://t.me/rootlover52 |
-| QQ | 1703205607 |
 
 站内还有完整的「维护与联系」整页（侧栏「我的」→「维护与联系」，或直接访问 `#/contact`）：维护方式与许可证、维护者卡片、多种联系渠道、三类填好模板的 Issue 入口（报告问题 / 功能建议 / 申请收录）、项目信息与隐私说明；「使用文档」里也有对应章节。
 
 反馈问题时请附上系统、浏览器、访问地址与复现步骤。本站不收集访客资料，游客的收藏与设置只保存在本机浏览器里。
 
-> 联系方式中 GitHub 主页、项目仓库、Pages、Issues 来自公开资料；Telegram 与 QQ 为开发者主动公开的渠道；未公开的邮箱与个人网站会明确标注，不会编造。
+> 本项目只提供公开、可追踪的联系渠道（GitHub 主页 / 仓库 / Issues），不展示任何人的私人联系方式。
 
 ---
 
@@ -629,24 +619,17 @@ WBit **由社区共同维护**，不设单一维护者门槛：讨论、决策�
 | 许可证 | [GPL-3.0](LICENSE)（SPDX: `GPL-3.0-only`） |
 | 版权 | WBit contributors（社区共同维护，见 [CONTRIBUTING.md](CONTRIBUTING.md)） |
 | 商用 | 允许，须遵守 GPL-3.0 的开源与同许可证要求 |
-| 闭源商用 | 需要豁免 copyleft 时，可申请[商业许可](COMMERCIAL-LICENSE.md) |
+| 闭源商用 | 不允许 — 本项目仅按 GPL-3.0 发布，不提供其他授权 |
 
-**需要闭源集成 / OEM / 客户交付？** 本项目提供可选的 **[商业许可协议](COMMERCIAL-LICENSE.md)** 作为 GPL-3.0 的替代授权。注意：**GPL-3.0 本身就允许商业使用和收费**，只有当你不希望公开衍生作品源码时才需要申请商业许可，普通使用、自用、按 GPL 开源分发都无需申请、无需付费。详见[商业许可协议](COMMERCIAL-LICENSE.md)第 0 节的场景对照表。
+本项目**只按 GPL-3.0 发布，不提供其他授权**。GPL-3.0 本身已允许商业使用和收费；如果你需要在不公开衍生作品源码的前提下商用，本项目无法提供豁免——上游项目的商业许可只由其版权人授予。
 
 ---
 
-## 商业许可（可选）
+## 上游与致谢
 
-| 你的场景 | 用哪个授权 |
-| --- | --- |
-| 自用、内部使用、学习、按 GPL-3.0 开源分发、按 GPL 收费提供服务 | [GPL-3.0](LICENSE)，无需申请 |
-| 把 WBit 集成进闭源产品、交付客户、OEM、不公开衍生作品源码 | [商业许可](COMMERCIAL-LICENSE.md) |
+本项目是 [Orbit · GitHub 导航站](https://github.com/DaiYiqq/orbit-github-nav)（作者 [@DaiYiqq](https://github.com/DaiYiqq)，GPL-3.0）的个人化衍生版本，在其基础上做了品牌更名与配置调整。
 
-[COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md) 是完整协议文本，包含：授权范围与 copyleft 义务豁免、限制与禁止事项、费用与申请流程、期限与终止、保证免责与责任限制、保密、适用法律与争议解决，以及社区贡献与第三方内容的权利边界。申请渠道在协议第 12 节。
-
-**准备签署？** 可直接填写的[签署版模板（中文为准）](docs/COMMERCIAL_AGREEMENT_TEMPLATE.md)与[English template](docs/COMMERCIAL_AGREEMENT_TEMPLATE.en.md)已备好，含双方主体、授权范围与排除项清单、费用、争议解决、签署栏及签署前自检清单。填写后的版本含商业敏感信息，请勿提交到公开仓库。
-
-> 本站收录的第三方项目、博客与论文各自遵循其原许可证，商业许可不覆盖它们；使用前请查看该项目自己的许可证。
+按 GPL-3.0 的要求，本仓库保留上游的许可证全文与来源说明；上游代码与内容的版权归原作者所有，此处署名不表示原作者对本项目背书。
 
 ---
 

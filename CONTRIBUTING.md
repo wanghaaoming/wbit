@@ -1,6 +1,6 @@
 # 贡献指南 · 社区共同维护
 
-Orbit 由**社区共同维护**。这里说明如何参与、决策怎么做出、以及提交内容需要遵守什么。
+WBit 由**社区共同维护**。这里说明如何参与、决策怎么做出、以及提交内容需要遵守什么。
 
 > 简体中文为主；英文精简说明见 [README.en.md](README.en.md#contributing)。
 
@@ -8,13 +8,13 @@ Orbit 由**社区共同维护**。这里说明如何参与、决策怎么做出�
 
 ## 1. 基本原则
 
-- **公开协作**：讨论、需求取舍、代码评审与合并都在 [Issues](https://github.com/DaiYiqq/orbit-github-nav/issues) 与 Pull Request 里公开进行，便于留痕、对所有人都可见。
+- **公开协作**：讨论、需求取舍、代码评审与合并都在 [Issues](https://github.com/wanghaaoming/wbit/issues) 与 Pull Request 里公开进行，便于留痕、对所有人都可见。
 - **不设专属门槛**：不需要被「指派」才能参与，发现问题、补充内容、改进文档、修 bug、提想法都算贡献。
 - **保持项目底线**：
   - 全部浏览功能**免登录**可用（搜索、筛选、收藏、分享、源码浏览），不要给这些功能加登录门槛。
   - 源码浏览与 GitHub 连接是**只读**设计，本站不代替用户在 GitHub 上执行 Star / Fork / Issue / PR。
   - 内容必须基于**真实存在**的仓库、链接与数据，不编造用户评价、Demo 数据、收录链接或截图。
-- **互相尊重**：对事不对人，给新人留耐心；不发布垃圾群发、硬广或刷量内容（详见 [docs/GROWTH_PLAYBOOK.md](docs/GROWTH_PLAYBOOK.md) 第 7 节）。
+- **互相尊重**：对事不对人，给新人留耐心；不发布垃圾群发、硬广或刷量内容。
 
 ---
 
@@ -27,7 +27,7 @@ Orbit 由**社区共同维护**。这里说明如何参与、决策怎么做出�
 | 申请收录项目 | 用「申请收录」模板，贴仓库地址与推荐理由；站内 `#/contact` 也有直达入口 |
 | 补充人工精选内容 | 编辑 `site/data/catalog.js`（AI 工具、社区、博客、论文） |
 | 更新仓库索引 | `node scripts/fetch-repos.mjs`；配置 `GITHUB_TOKEN` 可提高额度 |
-| 改进文档 / 翻译 | 修改 `README.md`、`README.en.md`、`docs/` 或 `site/data/docs.js` |
+| 改进文档 / 翻译 | 修改 `README.md`、`README.en.md` 或 `site/data/docs.js` |
 | 改代码 / 改样式 | Fork 后建分支提交 PR，流程见第 3 节 |
 
 ---
@@ -71,28 +71,19 @@ Orbit 由**社区共同维护**。这里说明如何参与、决策怎么做出�
 
 - **不要提交任何密钥**：`site/cloud-config.js` 只放允许公开的 `endpoint` / `publishableKey`；OAuth `client_secret`、云服务私钥、个人访问令牌一律不进仓库。
 - 本站不收集访客资料，游客的收藏与设置只保存在本机浏览器；请勿加入埋点、追踪脚本或第三方统计。
-- 发现安全漏洞请**不要**公开提 Issue，先通过 [维护者与开发者联系信息](README.md#维护者与开发者联系信息) 里的渠道私下告知。
+- 发现安全漏洞请**不要**公开提 Issue，可先通过 [Issues 页面](https://github.com/wanghaaoming/wbit/issues) 之外的公开渠道（GitHub 主页）联系维护者说明。
 
 ---
 
-## 6. 许可证约定与贡献者授权
+## 6. 许可证约定
 
-本项目采用 **GPL-3.0** 为默认许可证，同时提供可选的 **[商业许可](COMMERCIAL-LICENSE.md)**（双许可）。GPL-3.0 本身已允许商业使用；商业许可只为需要豁免 copyleft 义务的场景提供替代授权。
-
-### 6.1 贡献者授权（请务必阅读）
-
+- 本项目采用 **GPL-3.0**（全文见 [LICENSE](LICENSE)）。这是从上游项目继承的许可证，**不要更换或删除**。
+- 本项目的上游来源与 GPL-3.0 署名要求见 [README.md](README.md) 致谢章节与 [CHANGELOG.md](CHANGELOG.md)。
 - 提交 Issue / PR 即表示你同意：你的贡献按 **GPL-3.0** 授权给本项目与所有后续使用者。
-- 同时，你**授予项目维护方为提供商业许可所必需的再许可权利**（即允许维护方将你的贡献纳入 [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md) 项下的商业授权范围）。没有这项授权，社区共同维护的项目就无法合法地对外提供双许可。
 - 你保留自己代码的版权；上述授权是**非独占**的，你仍可自行以任何方式使用自己的代码。
-- 本条款自 2026-11-13 起对**此后提交的贡献**生效，不追溯改变此前贡献的授权状态；历史贡献仍按当时的 GPL-3.0 授权使用，商业许可覆盖范围以签署版列明为准（见 [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md) 第 2.2 条）。
-- 若你不接受再许可条款，请在 PR 中明确说明，我们会只按 GPL-3.0 合入你的贡献，并在商业许可覆盖范围中排除该部分。
-
-### 6.2 其它约定
-
-- 若你的 PR 引入了第三方代码或素材，请在 PR 里注明来源与其许可证，并确认与 GPL-3.0 **及**商业许可兼容；不兼容的内容不会被纳入商业许可范围。
+- 若你的 PR 引入了第三方代码或素材，请在 PR 里注明来源与其许可证，并确认与 GPL-3.0 兼容。
 - **第三方内容不受本许可证影响**：本站收录的开源项目、博客、论文与外链，版权与许可证归各自作者所有，本站只做导航与索引，不改变它们的授权条款。
-- 请不要删除或改写 [LICENSE](LICENSE) / [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md) 全文，也不要移除源码中的版权与许可证声明。
-- 商业许可的具体条款与申请流程见 [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md)；可直接填写的[签署版模板](docs/COMMERCIAL_AGREEMENT_TEMPLATE.md)（[English](docs/COMMERCIAL_AGREEMENT_TEMPLATE.en.md)）含授权范围与排除项清单，填写后的版本含商业敏感信息，**不要提交到公开仓库**。条款相关问题请在公开 Issue 中讨论，具体商业条款通过私信渠道沟通。
+- 请不要删除或改写 [LICENSE](LICENSE) 全文，也不要移除源码或文档中**上游项目的版权声明与来源说明**。
 
 ---
 
@@ -102,4 +93,4 @@ Orbit 由**社区共同维护**。这里说明如何参与、决策怎么做出�
 
 ---
 
-谢谢让 Orbit 变得更好。讨论与决策都在 [Issues](https://github.com/DaiYiqq/orbit-github-nav/issues) 公开进行，欢迎从这里开始。
+谢谢让 WBit 变得更好。讨论与决策都在 [Issues](https://github.com/wanghaaoming/wbit/issues) 公开进行，欢迎从这里开始。

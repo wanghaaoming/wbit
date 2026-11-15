@@ -2,6 +2,9 @@
 .workbuddy/
 *.genie
 
+# 本地 IDE / 工具数据（不需要进入仓库）
+.codeartsdoer/
+
 # 本地预览 / 自检临时产物
 .orbit-cdp-profile*/
 *.log

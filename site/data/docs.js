@@ -178,23 +178,19 @@ window.__ORBIT_DOCS__ = {
     {
       id: 'contact', title: '维护与联系信息', icon: 'user',
       blocks: [
-        { t: 'p', text: 'WBit 由社区共同维护，采用 GPL-3.0 许可证；项目发起人为 GitHub 用户 DaiYi（@wanghaaoming）。讨论、决策与合并都在公开的 Issues / PR 里进行，协作约定见仓库 CONTRIBUTING.md。未公开的联系方式会明确标注，不会编造私人邮箱或手机号。' },
+        { t: 'p', text: 'WBit 由社区共同维护，采用 GPL-3.0 许可证；本项目基于上游项目 Orbit · GitHub 导航站（GPL-3.0）二次开发。讨论、决策与合并都在公开的 Issues / PR 里进行，协作约定见仓库 CONTRIBUTING.md。本站只提供公开、可追踪的联系渠道，不展示任何人的私人联系方式。' },
         { t: 'table', head: ['渠道', '地址 / 状态', '适合做什么'], rows: [
-          ['GitHub 主页', 'https://github.com/wanghaaoming', '了解项目发起人与其它开源项目'],
+          ['GitHub 主页', 'https://github.com/wanghaaoming', '了解维护者与其它开源项目'],
           ['项目仓库', 'https://github.com/wanghaaoming/wbit', '看源码、提交记录、发布与工作流'],
           ['Issues（推荐）', '…/wbit/issues', '报告问题、功能建议、申请收录，公开可追踪'],
           ['贡献指南', 'CONTRIBUTING.md', '社区共同维护的协作约定与 PR 流程'],
           ['许可证', 'LICENSE（GPL-3.0）', '使用、修改、再发布与商用前先读'],
-          ['商业许可', 'COMMERCIAL-LICENSE.md', '可选：闭源集成 / OEM / 客户交付时申请'],
-          ['签署版模板', 'docs/COMMERCIAL_AGREEMENT_TEMPLATE.md', '可填写的签署模板（含中英对照与排除项清单）'],
-          ['邮箱', '未公开', '请用 Issues 联系；补充后会自动显示'],
-          ['个人网站', '未公开', '可在 site/config.js 的 developer 配置里补充'],
+          ['上游项目', 'github.com/DaiYiqq/orbit-github-nav', '本项目的来源与 GPL-3.0 署名对象'],
         ] },
         { t: 'list', items: [
-          '想补充邮箱或个人主页：改 site/config.js 的 developer.email / developer.site，站内联系页会自动带上。',
           '反馈问题时最好附上系统、浏览器、访问地址与复现步骤；站内联系页提供三种填好模板的 Issue 入口。',
-          '本项目由社区共同维护，采用 GPL-3.0 许可证：可自由使用、修改与再发布（含商用），衍生作品分发时须同样采用 GPL-3.0 并提供源代码；收录的第三方项目许可证归各自作者所有。',
-          'GPL-3.0 本身已允许商业使用和收费；只有需要闭源分发、OEM 或客户交付时，才需申请 COMMERCIAL-LICENSE.md 里的可选商业许可，普通使用无需申请、无需付费。',
+          '本项目由社区共同维护，采用 GPL-3.0 许可证：可自由使用、修改与再发布（含商用），衍生作品分发时须同样采用 GPL-3.0、提供源代码并保留上游项目的版权声明与来源说明；收录的第三方项目许可证归各自作者所有。',
+          'GPL-3.0 本身已允许商业使用和收费，本项目不额外提供其他许可。',
           '本站不收集访客资料；游客的收藏与设置只保存在你自己的浏览器里。',
         ] },
         { t: 'links', items: [{ n: '打开维护与联系', u: '#/contact', d: '维护方式、许可证、联系方式与三类反馈模板' }] },

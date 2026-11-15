@@ -1,5 +1,5 @@
 /**
- * Orbit · GitHub OAuth 交换代理（Cloudflare Worker 模板）
+ * WBit · GitHub OAuth 交换代理（Cloudflare Worker 模板）
  * ------------------------------------------------------------
  * 为什么需要它：GitHub OAuth App 的「授权码 → access_token」交换必须带 client_secret，
  * 而浏览器前端不能保存任何密钥。这个免费 Worker 只做一件事：拿 code 换 token，
@@ -10,9 +10,9 @@
  *   2. Settings → Variables and Secrets 添加：
  *        GITHUB_CLIENT_ID         = 你的 OAuth App Client ID
  *        GITHUB_CLIENT_SECRET     = 你的 OAuth App Client Secret（务必用 Secret 类型）
- *        ALLOWED_ORIGIN           = https://orbit-github-nav.app.workbuddy.host
+ *        ALLOWED_ORIGIN           = https://wbit.app.workbuddy.host
  *                                   （若同时用 GitHub Pages，可填多个，用英文逗号分隔）
- *        ALLOWED_REDIRECT_PREFIX = https://orbit-github-nav.app.workbuddy.host/
+ *        ALLOWED_REDIRECT_PREFIX = https://wbit.app.workbuddy.host/
  *                                   （留空则只按 ALLOWED_ORIGIN 校验）
  *   3. GitHub → Settings → Developer settings → OAuth Apps → New OAuth App：
  *        Homepage URL              = 你的站点根地址
@@ -72,7 +72,7 @@ export default {
 
     const res = await fetch('https://github.com/login/oauth/access_token', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json', 'User-Agent': 'orbit-github-nav-oauth' },
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json', 'User-Agent': 'wbit-oauth' },
       body: JSON.stringify({
         client_id: env.GITHUB_CLIENT_ID,
         client_secret: env.GITHUB_CLIENT_SECRET,

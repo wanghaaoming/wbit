@@ -5,6 +5,8 @@
  * 部署到 GitHub Pages 二级域名时，只需把 githubUser / githubRepo 改成你自己的。
  * 生成的地址： https://<githubUser>.github.io/<githubRepo>/
  * 若使用自定义域名，把 siteUrl 改成你的域名即可。
+ *
+ * 上游来源与 GPL-3.0 署名见 README「致谢」章节与 CHANGELOG.md。
  */
 window.__GH_NAV_CONFIG__ = {
   siteName: 'WBit',
@@ -15,7 +17,6 @@ window.__GH_NAV_CONFIG__ = {
   // 站内「维护与联系」页会读取这里显示；改许可证时同步改 LICENSE 文件。
   license: 'GPL-3.0',
   licenseUrl: 'https://github.com/wanghaaoming/wbit/blob/main/LICENSE',
-  commercialLicenseUrl: 'https://github.com/wanghaaoming/wbit/blob/main/COMMERCIAL-LICENSE.md',
   governance: '社区共同维护',
 
   // ── GitHub Pages ────────────────────────────────────────────
@@ -24,24 +25,17 @@ window.__GH_NAV_CONFIG__ = {
   siteUrl: '',                     // 自定义域名；留空时按当前站点自动推断
 
   // ── 开发者联系信息 ─────────────────────────────────
-  // 取自 GitHub 公开资料；账号未公开邮箱 / 个人主页，所以留空，
-  // 站内「维护与联系」页会明确显示「未公开」并引导使用 Issues。
-  // 想补充时直接填 email / site，页面与 README 会自动带上。
+  // 只提供公开、可追踪的渠道（GitHub 主页 / 仓库 / Issues）。
+  // 不收录任何人的私人联系方式（QQ / Telegram / 电话等）；
+  // 站内「维护与联系」页只展示下面这些公开入口。
   developer: {
-    name: '戴亿',
+    name: 'WBit',
     github: 'wanghaaoming',
     githubUrl: 'https://github.com/wanghaaoming',
-    avatar: 'https://avatars.githubusercontent.com/u/238861530?v=4',
+    avatar: 'https://github.com/wanghaaoming.png',
     repoUrl: 'https://github.com/wanghaaoming/wbit',
     issuesUrl: 'https://github.com/wanghaaoming/wbit/issues',
-    telegram: 'daiyi520',
-    telegramUrl: 'https://t.me/daiyi520',
-    telegramChannel: 'rootlover52',
-    telegramChannelUrl: 'https://t.me/rootlover52',
-    qq: '1703205607',
-    email: '',
-    site: '',
-    note: '欢迎通过 Issues、Telegram 或 QQ 反馈问题、提出建议或申请收录项目。',
+    note: '欢迎通过 Issues 反馈问题、提出建议或申请收录；本站不提供私人联系方式。',
   },
 
   // ── 可选登录 / 跨端同步 ─────────────────────────────────────

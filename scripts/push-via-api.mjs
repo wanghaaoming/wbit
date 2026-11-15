@@ -156,7 +156,7 @@ const treeObj = buildTree(rootNode, 'root');
 console.log(`tree：${treeObj.sha.slice(0, 8)}（${tree.length} 个文件 / ${treeCount} 棵树）`);
 
 const now = new Date().toISOString();
-const who = { name: 'DaiYi', email: `${OWNER}@users.noreply.github.com`, date: now };
+const who = { name: OWNER, email: `${OWNER}@users.noreply.github.com`, date: now };
 const commit = ghApi('POST', `repos/${OWNER}/${NAME}/git/commits`, {
   message: MESSAGE, tree: treeObj.sha, parents: parent ? [parent] : [], author: who, committer: who,
 });

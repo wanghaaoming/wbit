@@ -393,8 +393,8 @@ else {
       issues: document.querySelectorAll('a[href*="/issues"]').length,
       undisclosed: (document.getElementById('view').textContent || '').includes('未公开')
     })`);
-    check(contact.hero && /戴亿|wanghaaoming|WBit/i.test(contact.name) && contact.channels >= 5 && contact.feedback === 3 && contact.issues >= 2 && contact.undisclosed,
-      `联系开发者整页（${contact.channels} 个渠道 / ${contact.feedback} 类反馈 / 未公开项明确标注）`);
+    check(contact.hero && /wanghaaoming|WBit/i.test(contact.name) && contact.channels === 3 && contact.feedback === 3 && contact.issues >= 2,
+      `联系开发者整页（${contact.channels} 个公开渠道 / ${contact.feedback} 类反馈）`);
     await evaluate(`location.hash = '#/repos'`); await sleep(300);
 
     const cloudDiag = await evaluate(`({loaded: typeof window.WorkBuddyCloud === 'object', ready: window.GHCloud.state.ready, err: (window.GHCloud.state.sdkError || '').slice(0, 50)})`);

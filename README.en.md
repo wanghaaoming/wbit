@@ -1,16 +1,19 @@
-# Orbit · GitHub Navigation
+# WBit · GitHub Navigation
 
-[![GitHub stars](https://img.shields.io/github/stars/DaiYiqq/orbit-github-nav?style=flat&logo=github&label=stars)](https://github.com/DaiYiqq/orbit-github-nav/stargazers) [![License: GPL v3](https://img.shields.io/github/license/DaiYiqq/orbit-github-nav?style=flat&label=license)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/wanghaaoming/wbit?style=flat&logo=github&label=stars)](https://github.com/wanghaaoming/wbit/stargazers) [![License: GPL v3](https://img.shields.io/github/license/wanghaaoming/wbit?style=flat&label=license)](LICENSE)
 
 [简体中文](README.md) · English
 
-> **One-liner**: Orbit is a Chinese-language GitHub navigation site for beginners and developers — it automatically collects, categorizes and star-tiers open-source repositories so you can find, understand and jump to the right project without signing up, without coding, and without a build step.
+> **One-liner**: WBit is a Chinese-language GitHub navigation site for beginners and developers — it automatically collects, categorizes and star-tiers open-source repositories so you can find, understand and jump to the right project without signing up, without coding, and without a build step.
 >
-> **Governance**: Orbit is **community-maintained** under the [GPL-3.0](LICENSE) license. Everyone is welcome to join via Issues / PRs — see [CONTRIBUTING.md](CONTRIBUTING.md).
+> **Based on**: [Orbit · GitHub Navigation](https://github.com/DaiYiqq/orbit-github-nav) (GPL-3.0) — this repository is a personal fork with rebranding.
+>
+> **Governance**: WBit is **community-maintained** under the [GPL-3.0](LICENSE) license. Everyone is welcome to join via Issues / PRs — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 | Item | Value |
 | --- | --- |
-| Repository | https://github.com/DaiYiqq/orbit-github-nav |
+| Repository | https://github.com/wanghaaoming/wbit |
+| Upstream | https://github.com/DaiYiqq/orbit-github-nav (GPL-3.0) |
 | Governance | Community-maintained ([CONTRIBUTING.md](CONTRIBUTING.md)) |
 | License | [GPL-3.0](LICENSE) |
 | Stack | Vanilla HTML / CSS / JavaScript (no build, no framework) · GitHub Search API · PWA + Service Worker · Tauri 2 · GitHub Pages / Actions |
@@ -19,8 +22,8 @@
 
 | URL | Notes |
 | --- | --- |
-| https://DaiYiqq.github.io/orbit-github-nav/ | GitHub Pages — all browsing features work without an account |
-| https://orbit-github-nav.app.workbuddy.host/ | Published app mirror — email / SMS code sign-in works on this origin |
+| https://wanghaaoming.github.io/wbit/ | GitHub Pages — all browsing features work without an account |
+| https://wbit.app.workbuddy.host/ | Published app mirror — email / SMS code sign-in works on this origin |
 
 See [the Chinese README](README.md) for the full feature boundary and cloud/domain notes.
 
@@ -69,7 +72,7 @@ See [the Chinese README](README.md) for the full feature boundary and cloud/doma
 
 Only capabilities actually implemented in this repository are listed:
 
-| Common pattern | Orbit |
+| Common pattern | WBit |
 | --- | --- |
 | A link list that sends you away | A **full page** per project: README, stats, topics, license, 8 GitHub deep links, contribution steps, related projects |
 | Reading code means leaving the site | Built-in **source browser**: branches, file tree, highlighting, per-file copy / download |
@@ -101,46 +104,39 @@ node scripts/perf-audit.mjs      # performance / accessibility audit
 
 ## Contributing (community-maintained)
 
-Orbit is **community-maintained** — discussion, decisions and merges happen in the open via [Issues](https://github.com/DaiYiqq/orbit-github-nav/issues) and PRs, with no single-maintainer gate. The full guidelines, Issue templates and PR workflow are in **[CONTRIBUTING.md](CONTRIBUTING.md)**.
+WBit is **community-maintained** — discussion, decisions and merges happen in the open via [Issues](https://github.com/wanghaaoming/wbit/issues) and PRs. The full guidelines, Issue templates and PR workflow are in **[CONTRIBUTING.md](CONTRIBUTING.md)**.
 
 In short: use the Issue templates (bug / feature / repository nomination), edit `site/data/catalog.js` for curated content, run `node scripts/smoke-test.mjs` before a PR, and never commit secrets — `site/cloud-config.js` holds public config only. Keep all browsing features usable without an account, and never fabricate data, links or screenshots.
 
 ## License
 
-Orbit is licensed under the **[GNU General Public License v3.0 (GPL-3.0)](LICENSE)** and is community-maintained.
+WBit is licensed under the **[GNU General Public License v3.0 (GPL-3.0)](LICENSE)** and is community-maintained. It is a fork of the upstream project **[Orbit · GitHub Navigation](https://github.com/DaiYiqq/orbit-github-nav)**, also GPL-3.0; the upstream license, copyright notice and source attribution are retained as required by the license.
 
 - You may run, study, modify, copy and redistribute this project, including commercially, but **derivative works you distribute must also be licensed under GPL-3.0 with source available**, and must retain copyright/license notices and state changes. See [LICENSE](LICENSE) for the full text.
 - Submitting an Issue / PR means you agree your contribution is licensed under GPL-3.0 for this project and all downstream users.
-- **Third-party content is unaffected**: the repositories, blogs, papers and external links indexed here remain the property of their respective authors under their own licenses — Orbit only navigates and indexes them. Check each project's own license before using it.
+- **Third-party content is unaffected**: the repositories, blogs, papers and external links indexed here remain the property of their respective authors under their own licenses — WBit only navigates and indexes them. Check each project's own license before using it.
 - Repository index data comes from the public GitHub API; curated links point to official product sites.
 
 | Item | Value |
 | --- | --- |
 | License | [GPL-3.0](LICENSE) (SPDX: `GPL-3.0-only`) |
 | Commercial use | Allowed under GPL-3.0's copyleft terms |
-| Closed-source use | Optional [Commercial License](COMMERCIAL-LICENSE.md) |
+| Closed-source use | Not offered — this project is released under GPL-3.0 only |
 
-## Commercial license (optional)
+## Maintainer & contact
 
-An optional **[Commercial License Agreement](COMMERCIAL-LICENSE.md)** is available as an alternative to GPL-3.0. Note that **GPL-3.0 already permits commercial use and charging** — you only need the commercial license when you want to integrate Orbit into a closed-source product, deliver it to clients, or otherwise distribute derivative works **without** releasing their source code. Normal use, internal use and GPL-compliant distribution need no application and no fee.
+WBit is community-maintained; discussion, decisions and merges happen in the open via [Issues](https://github.com/wanghaaoming/wbit/issues) / PRs.
 
-| Your case | Which license |
+| Item | Value |
 | --- | --- |
-| Internal use, study, GPL-compliant distribution, paid GPL support | [GPL-3.0](LICENSE) — no application |
-| Closed-source integration, client delivery, OEM, no source release | [Commercial License](COMMERCIAL-LICENSE.md) |
+| Repository | https://github.com/wanghaaoming/wbit |
+| GitHub Pages | https://wanghaaoming.github.io/wbit/ |
+| Issues (recommended) | https://github.com/wanghaaoming/wbit/issues |
 
-The agreement covers scope of grant and copyleft exemption, restrictions, fees and application process, term and termination, warranty disclaimer and liability limits, confidentiality, governing law, and the rights boundary for community contributions and third-party content. The application template and contact channels are in section 12. Third-party repositories, blogs and papers indexed here keep their own licenses and are **not** covered.
-
-**Ready to sign?** Fillable execution templates are provided: [Chinese (governing)](docs/COMMERCIAL_AGREEMENT_TEMPLATE.md) and [English](docs/COMMERCIAL_AGREEMENT_TEMPLATE.en.md). They cover party details, licensed scope and exclusion schedules, fees, dispute resolution, signature blocks and a pre-signature checklist. A completed version contains commercially sensitive information — do not commit it to the public repository.
-
-## Project founder & contact
-
-Orbit is community-maintained; discussion, decisions and merges happen in the open via [Issues](https://github.com/DaiYiqq/orbit-github-nav/issues) / PRs. Below are the project founder and publicly listed contact channels — **please use Issues / PRs for collaboration**.
-
-**DaiYi (戴亿)** (project founder) · GitHub [@DaiYiqq](https://github.com/DaiYiqq) · [Issues](https://github.com/DaiYiqq/orbit-github-nav/issues) · Telegram [@daiyi520](https://t.me/daiyi520) · [Telegram channel](https://t.me/rootlover52) · QQ 1703205607
+This project only lists public, trackable channels (GitHub profile / repository / Issues) and does **not** publish anyone's private contact details.
 
 ---
 
-Turning "where do I even start?" into a short list of projects filtered by topic, language, stars and activity — with README, source and maintenance status one click away — is what Orbit is for. It collects no visitor data and asks for no registration.
+Turning "where do I even start?" into a short list of projects filtered by topic, language, stars and activity — with README, source and maintenance status one click away — is what WBit is for. It collects no visitor data and asks for no registration.
 
 如果这个项目对你有帮助，欢迎点一个 ⭐ Star。
