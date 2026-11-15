@@ -242,6 +242,7 @@
       return `<div class="md-table-wrap"><table class="md-table"><thead class="md-thead"><tr class="md-tr">${head}</tr></thead><tbody class="md-tbody">${body}</tbody></table></div>`;
     };
     const out = [];
+    let headingSeq = 0;   // 标题序号：给每个标题一个稳定 id，供详情页「目录」跳转
     const tableBuf = [];
     const listStack = []; // { indent, tag, liOpen }：支持有序/无序列表与一层缩进嵌套
     const closeLists = (indent) => {
@@ -274,7 +275,7 @@
       if ((m = l.match(/^(#{1,6})\s+(.*)$/))) {
         closeLists(0);
         const h = Math.min(m[1].length + 2, 6);
-        out.push(`<h${h} class="md-h">${inline(m[2])}</h${h}>`); continue;
+        out.push(`<h${h} class="md-h" id="md-sec-${headingSeq++}">${inline(m[2])}</h${h}>`); continue;
       }
       if (/^\s*(---|\*\*\*|___)\s*$/.test(l)) { closeLists(0); out.push('<hr class="md-hr">'); continue; }
       if (/^\s*>\s?/.test(l)) { closeLists(0); out.push(`<blockquote class="md-quote">${inline(l.replace(/^\s*>\s?/, ''))}</blockquote>`); continue; }

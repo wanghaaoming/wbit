@@ -769,6 +769,11 @@
       case 'share-favs': shareFavs(); break;
       case 'compare': Store.toggleCompare(f); render({ keepScroll: true }); break;
       case 'cmp-remove': Store.removeCompare(f); render({ keepScroll: true }); break;
+      case 'toc-jump': {
+        const sec = document.getElementById(v);
+        if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        break;
+      }
       case 'clear-compare': Store.clearCompare(); render({ keepScroll: true }); break;
       case 'adopt-shared': {
         const added = Store.addFavs((v || '').split(',').filter(Boolean));

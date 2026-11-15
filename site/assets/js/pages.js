@@ -66,11 +66,29 @@
           <span class="tag">★ ${fmtNum(r.s)}</span><span class="tag">更新于 ${timeAgo(r.p)}</span></div>
       </div>`;
 
+    // README 目录：从渲染后的 HTML 里提取 h2/h3（标题已在 mdToHtml 里带 id）
+    const readmeHtml = d.readme ? G.mdToHtml(d.readme) : '';
+    const tocItems = [];
+    if (readmeHtml) {
+      // mdToHtml 把 # / ## / ### 映射为 h3 / h4 / h5，这里归一化成 1 / 2 / 3 级
+      const re = /<h([345]) class="md-h" id="(md-sec-\d+)">([\s\S]*?)<\/h\1>/g;
+      let mm;
+      while ((mm = re.exec(readmeHtml)) !== null) {
+        const text = mm[3].replace(/<[^>]+>/g, '').trim();
+        if (text) tocItems.push({ id: mm[2], text, lvl: Number(mm[1]) - 2 });
+      }
+    }
+    const toc = tocItems.length >= 3
+      ? `<nav class="md-toc" aria-label="README 目录"><b>${icon('book', 15)} 目录（${tocItems.length}）</b>
+          <ol>${tocItems.map((h) => `<li class="lvl-${h.lvl}"><a class="toc-link" role="button" tabindex="0" data-act="toc-jump" data-v="${h.id}">${esc(h.text)}</a></li>`).join('')}</ol></nav>`
+      : '';
+
     const readme = intro + (d.loading
       ? `<div class="detail-loading">正在读取项目 README…</div>`
-      : d.readme
+      : readmeHtml
         ? `<div class="md-source">${icon('book', 15)} README · <a href="${esc(url)}#readme" target="_blank" rel="noopener noreferrer">在 GitHub 查看原文 ↗</a></div>
-           <div class="detail-md">${G.mdToHtml(d.readme)}</div>`
+           ${toc}
+           <div class="detail-md">${readmeHtml}</div>`
         : `<div class="empty-state" style="padding:46px 16px"><div class="empty-icon">${icon('book', 40)}</div>
            <h3>暂时没有读到 README</h3><p>${esc(d.error || '这个项目可能没有写 README，或网络暂时不可用。')}</p>
            <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
