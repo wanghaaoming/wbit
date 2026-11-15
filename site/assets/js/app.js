@@ -116,6 +116,7 @@
       case 'feature': html = V.featurePage(r.param); title = (V.CATALOG.featured[r.param] || {}).title || '专题'; break;
       case 'favorites': html = V.favoritesPage(); title = '我的收藏'; break;
       case 'compare': html = V.comparePage(); title = '项目对比'; break;
+      case 'whatsnew': html = V.whatsNewPage(); title = '新收录'; break;
       case 'shared': {
         const names = (r.params.get('favs') || '').split(',').map((s) => s.trim()).filter(Boolean);
         html = V.sharedFavsPage(names); title = '分享的收藏';

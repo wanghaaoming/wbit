@@ -43,6 +43,7 @@
       { id: 'categories', label: '分类浏览', icon: 'layers', href: '#/categories' },
       { id: 'ranking', label: '星标榜单', icon: 'star', href: '#/ranking' },
       { id: 'trending', label: '趋势榜', icon: 'flame', href: '#/trending' },
+      { id: 'whatsnew', label: '新收录', icon: 'clock', href: '#/whatsnew' },
     ]},
     { group: 'AI 专区', items: [
       { id: 'ai', label: 'AI 导航', icon: 'sparkles', href: '#/ai', badge: 'AI' },
@@ -640,6 +641,32 @@
           <button class="icon-btn" data-act="cmp-remove" data-f="${esc(f)}">${icon('x', 15)}</button></div>`).join('')}</div>` : ''}`;
   }
 
+  /* ── 页面：新收录（与上一次索引的增量）─────────────── */
+  function whatsNewPage() {
+    const WN = w.__GH_NAV_WHATS_NEW__ || null;
+    if (!WN || !WN.latest) {
+      return `${pageHead('新收录', '暂无增量记录', '仓库索引每周自动更新；首次更新后，这里会列出与上一次相比新增的项目。')}
+        <div class="empty-state"><div class="empty-icon">${icon('clock', 44)}</div><h3>还没有增量数据</h3>
+        <p>索引由 scripts/fetch-repos.mjs 每周自动刷新，增量会在下次更新后出现在这里。</p>
+        <a class="btn btn-primary" href="#/repos">先逛全部仓库</a></div>`;
+    }
+    const latest = WN.latest;
+    const list = (latest.added || []).map((f) => byFullName[f]).filter(Boolean);
+    const when = latest.at ? new Date(latest.at).toLocaleDateString('zh-CN') : '—';
+    const history = (WN.history || []).slice(0, 8);
+    return `${pageHead('新收录', latest.baseline ? '本次建立了新基线' : `新增 ${latest.addedCount} 个项目`,
+      `最近一次索引更新于 ${when}，当前共收录 ${latest.count} 个仓库。这里只展示与上一次相比新收录的项目。`)}
+      <div class="panel" style="margin-bottom:20px">
+        <h3>${icon('clock', 16)} 更新记录</h3>
+        <ul class="docs-list">
+          ${history.map((h) => `<li>${h.at ? new Date(h.at).toLocaleDateString('zh-CN') : '—'} · ${h.baseline ? '建立基线（起始索引）' : `新增 <b>${h.addedCount}</b> 个${h.removedCount ? `、移除 ${h.removedCount} 个` : ''}`}</li>`).join('')}
+        </ul>
+      </div>
+      ${list.length
+        ? `<div class="repo-grid">${list.map((r, i) => repoCard(r, { delay: i * 20 })).join('')}</div>`
+        : `<div class="empty-state"><div class="empty-icon">${icon('info', 40)}</div><h3>本次没有新增项目</h3><p>最近一次更新只是刷新了星标与活跃度数据，没有新仓库进入索引。</p><a class="btn btn-primary" href="#/repos">逛全部仓库</a></div>`}`;
+  }
+
   /* ── 页面：安装（全平台） ───────────────────────── */
   function installPage() {
     const pagesUrl = `https://${CFG.githubUser || '<你的用户名>'}.github.io/${CFG.githubRepo || '<仓库名>'}/`;
@@ -1141,7 +1168,7 @@ npm run tauri build     # 生成各平台安装包
     S, NAV, TABS, REPOS, META, CATEGORIES, CAT_MAP, TIERS, CATALOG, byFullName,
     navHtml, tabbarHtml, filterRepos, repoGridHtml, drawerHtml, cmdkData, toolCard,
     discover, reposPage, categoriesPage, rankingPage, trendingPage, guidePage, sourcePage,
-    aiNavPage, communityPage, tutorialsPage, readingPage, featurePage, favoritesPage, sharedFavsPage, comparePage,
+    aiNavPage, communityPage, tutorialsPage, readingPage, featurePage, favoritesPage, sharedFavsPage, comparePage, whatsNewPage,
     installPage, settingsPage, notFound,
   };
 })(window);

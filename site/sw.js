@@ -14,7 +14,7 @@ const SHELL = [
   './assets/js/core.js', './assets/js/cloud.js', './assets/js/auth-ui.js',
   './assets/js/store.js', './assets/js/source.js', './assets/js/views.js',
   './assets/js/pages.js', './assets/js/app.js', './assets/js/motion.js', './assets/js/a11y.js',
-  './data/catalog.js', './data/docs.js', './data/repos.js', './data/tutorials.js', './data/tutorials-auto.js',
+  './data/catalog.js', './data/docs.js', './data/repos.js', './data/whats-new.js', './data/tutorials.js', './data/tutorials-auto.js',
   './assets/icons/favicon.svg', './assets/icons/icon.svg',
   './assets/icons/icon-192.png', './assets/icons/icon-512.png', './assets/icons/icon-180.png',
 ];

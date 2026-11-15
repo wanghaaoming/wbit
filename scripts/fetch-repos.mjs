@@ -246,6 +246,54 @@ async function main() {
 window.__GH_NAV_REPOS_RAW__ = ${JSON.stringify({ cols: COLS, rows })};
 window.__GH_NAV_META__ = ${JSON.stringify(meta)};
 `;
+
+  /* ── 增量快照：与上一次索引对比，产出「本周新收录」数据 ──────────
+     首次运行（没有上一版）或索引被重建时按「基线」处理，
+     不把整库当作新增，避免页面出现数千条「新增」。 */
+  const prevPath = path.join(OUT_DIR, 'repos.json');
+  let added = [], removed = [], isBaseline = false;
+  try {
+    if (fs.existsSync(prevPath)) {
+      const prev = JSON.parse(fs.readFileSync(prevPath, 'utf8'));
+      const prevSet = new Set(prev.map((r) => r.f));
+      const nowSet = new Set(repos.map((r) => r.f));
+      added = repos.filter((r) => !prevSet.has(r.f)).map((r) => r.f);
+      removed = prev.filter((r) => !nowSet.has(r.f)).map((r) => r.f);
+      // 增量超过总量一半，视为索引重建，按基线处理
+      if (added.length > repos.length / 2) { isBaseline = true; added = []; removed = []; }
+    } else {
+      isBaseline = true;
+    }
+  } catch (e) {
+    isBaseline = true;
+    console.warn('  增量对比失败（按基线处理）：' + e.message);
+  }
+
+  const wnPath = path.join(OUT_DIR, 'whats-new.json');
+  let wnHistory = [];
+  try {
+    if (fs.existsSync(wnPath)) wnHistory = (JSON.parse(fs.readFileSync(wnPath, 'utf8')).history || []);
+  } catch (e) { /* 旧文件损坏则忽略，重新累积 */ }
+
+  const entry = {
+    at: meta.updatedAt,
+    count: repos.length,
+    addedCount: added.length,
+    removedCount: removed.length,
+    baseline: isBaseline,
+    added: added.slice(0, 300),
+  };
+  const whatsNew = {
+    generatedAt: meta.updatedAt,
+    latest: entry,
+    history: [entry].concat(wnHistory).slice(0, 12),
+  };
+
+  fs.writeFileSync(path.join(OUT_DIR, 'whats-new.json'), JSON.stringify(whatsNew, null, 2), 'utf8');
+  fs.writeFileSync(path.join(OUT_DIR, 'whats-new.js'),
+    '/* 自动生成，请勿手工编辑。由 scripts/fetch-repos.mjs 产出 */\n' +
+    'window.__GH_NAV_WHATS_NEW__ = ' + JSON.stringify(whatsNew) + ';\n', 'utf8');
+
   fs.writeFileSync(path.join(OUT_DIR, 'repos.js'), jsBody, 'utf8');
   fs.writeFileSync(path.join(OUT_DIR, 'repos.json'), JSON.stringify(repos), 'utf8');
   fs.writeFileSync(path.join(OUT_DIR, 'meta.json'), JSON.stringify(meta, null, 2), 'utf8');
