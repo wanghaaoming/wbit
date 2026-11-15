@@ -629,6 +629,11 @@ WBit **由社区共同维护**，不设单一维护者门槛：讨论、决策�
 
 本项目是 [Orbit · GitHub 导航站](https://github.com/DaiYiqq/orbit-github-nav)（作者 [@DaiYiqq](https://github.com/DaiYiqq)，GPL-3.0）的个人化衍生版本，在其基础上做了品牌更名与配置调整。
 
+**版权声明**
+
+- 本项目（WBit）：Copyright (C) 2026 wanghaaoming
+- 上游项目（Orbit · GitHub 导航站）：Copyright (C) DaiYiqq，GPL-3.0
+
 按 GPL-3.0 的要求，本仓库保留上游的许可证全文与来源说明；上游代码与内容的版权归原作者所有，此处署名不表示原作者对本项目背书。
 
 ---

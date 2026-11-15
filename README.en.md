@@ -112,6 +112,11 @@ In short: use the Issue templates (bug / feature / repository nomination), edit 
 
 WBit is licensed under the **[GNU General Public License v3.0 (GPL-3.0)](LICENSE)** and is community-maintained. It is a fork of the upstream project **[Orbit · GitHub Navigation](https://github.com/DaiYiqq/orbit-github-nav)**, also GPL-3.0; the upstream license, copyright notice and source attribution are retained as required by the license.
 
+**Copyright notices**
+
+- WBit: Copyright (C) 2026 wanghaaoming
+- Upstream (Orbit · GitHub Navigation): Copyright (C) DaiYiqq, GPL-3.0
+
 - You may run, study, modify, copy and redistribute this project, including commercially, but **derivative works you distribute must also be licensed under GPL-3.0 with source available**, and must retain copyright/license notices and state changes. See [LICENSE](LICENSE) for the full text.
 - Submitting an Issue / PR means you agree your contribution is licensed under GPL-3.0 for this project and all downstream users.
 - **Third-party content is unaffected**: the repositories, blogs, papers and external links indexed here remain the property of their respective authors under their own licenses — WBit only navigates and indexes them. Check each project's own license before using it.
