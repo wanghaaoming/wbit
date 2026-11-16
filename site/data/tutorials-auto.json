@@ -1,0 +1,412 @@
+{
+  "updatedAt": "2026-11-16",
+  "source": "GitHub Search API",
+  "queryCount": 22,
+  "groups": [
+    {
+      "id": "agent-docs",
+      "title": "编程 Agent · 热门项目",
+      "desc": "按星标自动收录的编程 Agent 与 AI 编辑器，持续更新",
+      "icon": "bot",
+      "color": "#FF7A45",
+      "items": [
+        {
+          "n": "rea",
+          "d": "Reverse engineer anything with agents, from app behavior down to native binaries.",
+          "u": "https://github.com/morluto/rea",
+          "t": "★ 463k"
+        },
+        {
+          "n": "ECC",
+          "d": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development f",
+          "u": "https://github.com/affaan-m/ECC",
+          "t": "★ 304k"
+        },
+        {
+          "n": "hermes-agent",
+          "d": "The agent that grows with you",
+          "u": "https://github.com/NousResearch/hermes-agent",
+          "t": "★ 264k"
+        },
+        {
+          "n": "ponytail",
+          "d": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
+          "u": "https://github.com/DietrichGebert/ponytail",
+          "t": "★ 192k"
+        },
+        {
+          "n": "cc-switch",
+          "d": "A cross-platform desktop All-in-One assistant for Claude Code, Codex, OpenCode,DeepSeek Harness and more. Only official ",
+          "u": "https://github.com/farion1231/cc-switch",
+          "t": "★ 155k"
+        },
+        {
+          "n": "ui-ux-pro-max-skill",
+          "d": "An AI skill that provides design intelligence for building professional UI/UX across multiple platforms.",
+          "u": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+          "t": "★ 150k"
+        },
+        {
+          "n": "spec-kit",
+          "d": "💫 Toolkit to help you get started with SDD or any other process!",
+          "u": "https://github.com/github/spec-kit",
+          "t": "★ 150k"
+        },
+        {
+          "n": "graphify",
+          "d": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill fo",
+          "u": "https://github.com/Graphify-Labs/graphify",
+          "t": "★ 149k"
+        },
+        {
+          "n": "orca",
+          "d": "Orca lets you run a fleet of coding agents (e.g. Claude Code, Codex) with your own subscription. Available on desktop, m",
+          "u": "https://github.com/stablyai/orca",
+          "t": "★ 126k"
+        },
+        {
+          "n": "caveman",
+          "d": "🪨 why use many token when few token do trick. Viral skill + proxy for coding agents that cuts 65% of tokens by talking ",
+          "u": "https://github.com/JuliusBrussee/caveman",
+          "t": "★ 121k"
+        },
+        {
+          "n": "agent-skills",
+          "d": "Production-grade engineering skills for AI coding agents.",
+          "u": "https://github.com/addyosmani/agent-skills",
+          "t": "★ 118k"
+        },
+        {
+          "n": "claude-mem",
+          "d": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it ",
+          "u": "https://github.com/thedotmack/claude-mem",
+          "t": "★ 118k"
+        }
+      ]
+    },
+    {
+      "id": "agent-build",
+      "title": "自己造 Agent · 框架与范式",
+      "desc": "Agent 框架、多智能体编排与工作流引擎",
+      "icon": "blocks",
+      "color": "#0A84FF",
+      "items": [
+        {
+          "n": "AutoGPT",
+          "d": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so tha",
+          "u": "https://github.com/Significant-Gravitas/AutoGPT",
+          "t": "★ 188k"
+        },
+        {
+          "n": "deer-flow",
+          "d": "An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories",
+          "u": "https://github.com/bytedance/deer-flow",
+          "t": "★ 85k"
+        },
+        {
+          "n": "MetaGPT",
+          "d": "🌟 The Multi-Agent Framework: First AI Software Company, Towards Natural Language Programming",
+          "u": "https://github.com/FoundationAgents/MetaGPT",
+          "t": "★ 71k"
+        },
+        {
+          "n": "nanobot",
+          "d": "Your lightweight open-source personal agent.",
+          "u": "https://github.com/HKUDS/nanobot",
+          "t": "★ 50k"
+        },
+        {
+          "n": "CowAgent",
+          "d": "Open-source personal AI assistant & Agent Harness. Plans tasks, runs tools and skills, self-evolves with memory and know",
+          "u": "https://github.com/zhayujie/CowAgent",
+          "t": "★ 48k"
+        },
+        {
+          "n": "GPT_API_free",
+          "d": "免费大模型API，支持免费调用GPT、DeepSeek等主流模型，免费额度10000点，每日刷新！另付费价格最低官方1-2折！",
+          "u": "https://github.com/chatanywhere/GPT_API_free",
+          "t": "★ 46k"
+        },
+        {
+          "n": "BettaFish",
+          "d": "微舆：人人可用的多Agent舆情分析助手，打破信息茧房，还原舆情原貌，预测未来走向，辅助决策！从0实现，不依赖任何框架。",
+          "u": "https://github.com/666ghj/BettaFish",
+          "t": "★ 43k"
+        },
+        {
+          "n": "agents",
+          "d": "Plugins, agents, skills, and commands for Claude Code, Codex CLI, Cursor, OpenCode, Antigravity CLI, GitHub Copilot, and",
+          "u": "https://github.com/wshobson/agents",
+          "t": "★ 43k"
+        },
+        {
+          "n": "tidb",
+          "d": "TiDB is built for agentic workloads that grow unpredictably, with ACID guarantees and native support for transactions, a",
+          "u": "https://github.com/pingcap/tidb",
+          "t": "★ 41k"
+        },
+        {
+          "n": "Vibe-Trading",
+          "d": "\"Vibe-Trading: Your Personal Trading Agent\"",
+          "u": "https://github.com/HKUDS/Vibe-Trading",
+          "t": "★ 38k"
+        },
+        {
+          "n": "WeKnora",
+          "d": "Open-source LLM knowledge platform: turn raw documents into a queryable RAG, an autonomous reasoning agent, and a self-m",
+          "u": "https://github.com/Tencent/WeKnora",
+          "t": "★ 38k"
+        },
+        {
+          "n": "agentscope",
+          "d": "Build and run agents you can see, understand and trust.",
+          "u": "https://github.com/agentscope-ai/agentscope",
+          "t": "★ 36k"
+        }
+      ]
+    },
+    {
+      "id": "mcp",
+      "title": "MCP 与工具生态",
+      "desc": "Model Context Protocol 服务端、客户端与目录",
+      "icon": "plug",
+      "color": "#30B0C7",
+      "items": [
+        {
+          "n": "n8n",
+          "d": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host ",
+          "u": "https://github.com/n8n-io/n8n",
+          "t": "★ 211k"
+        },
+        {
+          "n": "dify",
+          "d": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cl",
+          "u": "https://github.com/langgenius/dify",
+          "t": "★ 161k"
+        },
+        {
+          "n": "JavaGuide",
+          "d": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
+          "u": "https://github.com/Snailclimb/JavaGuide",
+          "t": "★ 160k"
+        },
+        {
+          "n": "open-webui",
+          "d": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+          "u": "https://github.com/open-webui/open-webui",
+          "t": "★ 159k"
+        },
+        {
+          "n": "Scrapling",
+          "d": "🕷️ The BEST Web Scraping framework that handles everything from a single request to a full-scale crawl! Don't be shy, j",
+          "u": "https://github.com/D4Vinci/Scrapling",
+          "t": "★ 104k"
+        },
+        {
+          "n": "worldmonitor",
+          "d": "Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracki",
+          "u": "https://github.com/koala73/worldmonitor",
+          "t": "★ 91k"
+        },
+        {
+          "n": "crawl4ai",
+          "d": "Official Crawl4AI Cloud: a hosted web scraping, extraction, and search API for AI agents. Free API key, 1,000 credits a ",
+          "u": "https://github.com/unclecode/crawl4ai",
+          "t": "★ 87k"
+        },
+        {
+          "n": "lobehub",
+          "d": "🤯 LobeHub - Super-Agents on Your Team. Add super-agents to the chats your team already uses.They take on work by themse",
+          "u": "https://github.com/lobehub/lobehub",
+          "t": "★ 86k"
+        },
+        {
+          "n": "headroom",
+          "d": "Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95%",
+          "u": "https://github.com/headroomlabs-ai/headroom",
+          "t": "★ 80k"
+        },
+        {
+          "n": "private-gpt",
+          "d": "Complete API layer for private AI applications on local models: RAG, skills, tools, MCP, text-to-sql, and more. Works wi",
+          "u": "https://github.com/zylon-ai/private-gpt",
+          "t": "★ 58k"
+        },
+        {
+          "n": "codebase-memory-mcp",
+          "d": "Local code intelligence for developers and AI agents. Connect code, docs and infrastructure in a persistent graph, with ",
+          "u": "https://github.com/DeusData/codebase-memory-mcp",
+          "t": "★ 49k"
+        },
+        {
+          "n": "playwright-mcp",
+          "d": "Playwright MCP server",
+          "u": "https://github.com/microsoft/playwright-mcp",
+          "t": "★ 40k"
+        }
+      ]
+    },
+    {
+      "id": "prompt",
+      "title": "Prompt 与上下文工程",
+      "desc": "提示词模板、系统提示词合集与上下文管理实践",
+      "icon": "sparkles",
+      "color": "#7C5CFF",
+      "items": [
+        {
+          "n": "prompts.chat",
+          "d": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-hos",
+          "u": "https://github.com/f/prompts.chat",
+          "t": "★ 178k"
+        },
+        {
+          "n": "academic-research-skills",
+          "d": "Academic Research Skills for Claude Code: research → write → review → revise → finalize",
+          "u": "https://github.com/Imbad0202/academic-research-skills",
+          "t": "★ 57k"
+        },
+        {
+          "n": "CL4R1T4S",
+          "d": "LEAKED SYSTEM PROMPTS FOR CHATGPT, CLAUDE, GEMINI, GROK, PERPLEXITY, CURSOR, LOVABLE, REPLIT, AND MORE! - AI SYSTEMS TRA",
+          "u": "https://github.com/elder-plinius/CL4R1T4S",
+          "t": "★ 53k"
+        },
+        {
+          "n": "prompt-optimizer",
+          "d": "An AI prompt optimizer for writing better prompts and getting better AI results.",
+          "u": "https://github.com/linshenkx/prompt-optimizer",
+          "t": "★ 42k"
+        },
+        {
+          "n": "awesome-copilot",
+          "d": "Community-contributed instructions, agents, skills, and configurations to help you make the most of GitHub Copilot.",
+          "u": "https://github.com/github/awesome-copilot",
+          "t": "★ 41k"
+        },
+        {
+          "n": "nuwa-skill",
+          "d": "你想蒸馏的下一个员工，何必是同事。蒸馏任何人的思维方式——心智模型、决策启发式、表达DNA。Distill how anyone thinks.",
+          "u": "https://github.com/alchaincyf/nuwa-skill",
+          "t": "★ 38k"
+        },
+        {
+          "n": "langfuse",
+          "d": "🪢 Open source AI engineering platform: AI Gateway, agent observability, evals, and prompt/skill management, built on Op",
+          "u": "https://github.com/langfuse/langfuse",
+          "t": "★ 37k"
+        },
+        {
+          "n": "awesome-gpt-image-2",
+          "d": "Prompt as Code | GPT Image 2 / 2.5 提示词与案例库，530+ 个案例、20+ 套工业级模板与可复用 Skills，新增 2.5 同提示词对比专区，附完整提示词与生成记录，持续更新。",
+          "u": "https://github.com/freestylefly/awesome-gpt-image-2",
+          "t": "★ 36k"
+        },
+        {
+          "n": "claude-skills",
+          "d": "410 Claude Code skills & agent skills & plugins (120+ Agents, custom commands, 410+ skills, customizable references, scr",
+          "u": "https://github.com/alirezarezvani/claude-skills",
+          "t": "★ 30k"
+        },
+        {
+          "n": "mlflow",
+          "d": "The open source AI engineering platform for agents, LLMs, and ML models. MLflow enables teams of all sizes to debug, eva",
+          "u": "https://github.com/mlflow/mlflow",
+          "t": "★ 29k"
+        },
+        {
+          "n": "promptfoo",
+          "d": "Test your prompts, agents, and RAGs. Red teaming/pentesting/vulnerability scanning for AI. Compare performance of GPT, C",
+          "u": "https://github.com/promptfoo/promptfoo",
+          "t": "★ 27k"
+        },
+        {
+          "n": "opik",
+          "d": "Debug, evaluate, and monitor your LLM applications, RAG systems, and agentic workflows with comprehensive tracing, autom",
+          "u": "https://github.com/comet-ml/opik",
+          "t": "★ 23k"
+        }
+      ]
+    },
+    {
+      "id": "dev",
+      "title": "通用编程教程",
+      "desc": "成体系的教程、路线图与实战课程",
+      "icon": "code",
+      "color": "#34C759",
+      "items": [
+        {
+          "n": "developer-roadmap",
+          "d": "Interactive roadmaps, guides and other educational content to help developers grow in their careers.",
+          "u": "https://github.com/nilbuild/developer-roadmap",
+          "t": "★ 372k"
+        },
+        {
+          "n": "Web-Dev-For-Beginners",
+          "d": "24 Lessons, 12 Weeks, Get Started as a Web Developer",
+          "u": "https://github.com/microsoft/Web-Dev-For-Beginners",
+          "t": "★ 97k"
+        },
+        {
+          "n": "hello-agents",
+          "d": "📚 《从零开始构建智能体》——从零开始的智能体原理与实践教程",
+          "u": "https://github.com/datawhalechina/hello-agents",
+          "t": "★ 87k"
+        },
+        {
+          "n": "learn-claude-code",
+          "d": "Bash is all you need - A nano claude code–like 「agent harness」, built from 0 to 1",
+          "u": "https://github.com/shareAI-lab/learn-claude-code",
+          "t": "★ 80k"
+        },
+        {
+          "n": "ai-engineering-from-scratch",
+          "d": "Learn AI Engineering! Learn it. Build it. Ship it for others.",
+          "u": "https://github.com/rohitg00/ai-engineering-from-scratch",
+          "t": "★ 79k"
+        },
+        {
+          "n": "awesome-react",
+          "d": "A collection of awesome things regarding React ecosystem",
+          "u": "https://github.com/enaqx/awesome-react",
+          "t": "★ 75k"
+        },
+        {
+          "n": "up",
+          "d": "韩先凯的人生进阶指南 AI时代 中英双语终身学习指南：AI、学习 、创业、财富、爱情与人生",
+          "u": "https://github.com/byoungd/up",
+          "t": "★ 71k"
+        },
+        {
+          "n": "annotated_deep_learning_paper_implementations",
+          "d": "🧑‍🏫 60+ Implementations/tutorials of deep learning papers with side-by-side notes 📝; including transformers (original",
+          "u": "https://github.com/labmlai/annotated_deep_learning_paper_implementations",
+          "t": "★ 68k"
+        },
+        {
+          "n": "awesome-flutter",
+          "d": "An awesome list that curates the best Flutter libraries, tools, tutorials, articles and more.",
+          "u": "https://github.com/Solido/awesome-flutter",
+          "t": "★ 62k"
+        },
+        {
+          "n": "DeepTutor",
+          "d": "DeepTutor: Lifelong Personalized Tutoring. https://deeptutor.info/.",
+          "u": "https://github.com/HKUDS/DeepTutor",
+          "t": "★ 60k"
+        },
+        {
+          "n": "first-contributions",
+          "d": "🚀✨ Help beginners to contribute to open source projects",
+          "u": "https://github.com/firstcontributions/first-contributions",
+          "t": "★ 57k"
+        },
+        {
+          "n": "100-Days-Of-ML-Code",
+          "d": "100 Days of ML Coding",
+          "u": "https://github.com/Avik-Jain/100-Days-Of-ML-Code",
+          "t": "★ 52k"
+        }
+      ]
+    }
+  ]
+}
